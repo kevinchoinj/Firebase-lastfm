@@ -1,7 +1,7 @@
 import {
   AUTH_USER,
   SIGN_OUT_USER,
-  AUTH_ERROR
+  AUTH_ERROR,
 } from '../actions/authentication'
 
 const DEFAULT_STATE={

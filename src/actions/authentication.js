@@ -15,8 +15,8 @@ export function getCurrentUser() {
           dispatch(signOutUser());
         }
     });
-    }
-  };
+  }
+};
 export function signUpUser(data) {
   return function(dispatch) {
     return fire.auth().createUserWithEmailAndPassword(data.email, data.password)
@@ -27,7 +27,7 @@ export function signUpUser(data) {
       dispatch(authError(error));
     });
   }
-}
+};
 export const signUpUserThenRedirect = (data, path) => (dispatch, getState) =>
   dispatch(signUpUser(data))
     .then(() => history.push(path));
@@ -43,7 +43,7 @@ export function signInUser(data) {
         dispatch(authError(error));
     });
   }
-}
+};
 export const signInUserThenRedirect = (data, path) => (dispatch, getState) =>
   dispatch(signInUser(data))
     .then(() => history.push(path));
@@ -57,17 +57,17 @@ export function signOutUser() {
         })
     });
   }
-}
+};
 
 export function authUser() {
-    return {
-        type: AUTH_USER
-    }
-}
+  return {
+    type: AUTH_USER
+  }
+};
 
 export function authError(error) {
-    return {
-        type: AUTH_ERROR,
-        payload: error
-    }
-}
+  return {
+    type: AUTH_ERROR,
+    payload: error
+  }
+};

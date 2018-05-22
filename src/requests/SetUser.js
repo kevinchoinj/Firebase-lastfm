@@ -2,7 +2,7 @@ import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import * as authActions from './actions/authentication';
+import * as authActions from '../actions/authentication';
 
 class SetUser extends React.Component{
   setUser = email => {

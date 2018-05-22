@@ -10,8 +10,9 @@ import DefaultPage from './pages/DefaultPage';
 import CheckStatus from './components/CheckStatus';
 import Navbar from './components/Navbar';
 
-import SetUser from './SetUser';
-import GetPages from './GetPages';
+import SetUser from './requests/SetUser';
+import GetPages from './requests/GetPages';
+import GetSong from './requests/GetSong';
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
         <SetUser/>
         <GetPages/>
         <CheckStatus/>
+        <GetSong/>
         <Navbar/>
         <Switch>
           <Route

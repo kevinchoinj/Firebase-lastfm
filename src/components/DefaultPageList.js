@@ -12,11 +12,11 @@ class CheckStatus extends React.Component {
     return pages ? (
       <div>
       {pages.map((page, key)=>
-        <Link to={"/test/"+key}>
-          <div key={key}>
+        <div key={key}>
+          <Link to={"/test/"+key}>
             {page.pageTitle}
-          </div>
-        </Link>
+          </Link>
+        </div>
         )
       }
       </div>
