@@ -6,6 +6,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
 import DefaultPage from './pages/DefaultPage';
+import Favorites from './pages/Favorites';
 
 import CheckStatus from './components/CheckStatus';
 import Navbar from './components/Navbar';
@@ -39,6 +40,10 @@ class App extends Component {
           <Route
             exact path="/admin"
             render={(props) => <Admin {...props}/>}
+          />
+          <Route
+            exact path="/favorites"
+            render={(props) => <Favorites {...props}/>}
           />
           <Route
             path="/test/:id"

@@ -22,12 +22,16 @@ class Navbar extends React.Component {
         <Link to="/login">log in</Link>
         <br/>
         <Link to="/admin">admin</Link>
+        <br/>
+        <Link to="/favorites">favorites</Link>
+        <br/>
         <div
           style={signoutStyle}
           onClick={this.signOut}
         >
           log out
         </div>
+        <br/>
       </div>
     );
   }

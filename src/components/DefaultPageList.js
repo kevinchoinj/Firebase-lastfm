@@ -11,6 +11,7 @@ class CheckStatus extends React.Component {
 
     return pages ? (
       <div>
+        Pages list
       {pages.map((page, key)=>
         <div key={key}>
           <Link to={"/test/"+key}>
@@ -19,6 +20,7 @@ class CheckStatus extends React.Component {
         </div>
         )
       }
+      <br/>
       </div>
     )
     :null;
