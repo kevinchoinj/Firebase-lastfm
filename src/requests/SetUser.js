@@ -1,8 +1,17 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
+import GetFavorites from './GetFavorites';
 import * as authActions from '../actions/authentication';
+
+const FavoritesDisplay = ({loggedIn}) => {
+  if (loggedIn){
+    return (<GetFavorites/>);
+  }
+  else {
+    return  null;
+  }
+};
 
 class SetUser extends React.Component{
   setUser = email => {
@@ -12,11 +21,21 @@ class SetUser extends React.Component{
     this.props.authActions.getCurrentUser();
   }
   render(){
-    return null;
+    const {
+      loggedIn,
+    } = this.props;
+
+    return (
+      <FavoritesDisplay
+        loggedIn={loggedIn}
+      />
+    );
   }
 }
 export default connect(
-  () => ({}),
+  (state, ownProps) => ({
+    loggedIn: state.authentication.loggedIn,
+  }),
   dispatch => ({
     authActions: bindActionCreators(authActions, dispatch)}),
 )(SetUser);

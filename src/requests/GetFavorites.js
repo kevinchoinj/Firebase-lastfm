@@ -13,7 +13,9 @@ class GetSong extends React.Component{
   }
 }
 export default connect(
-  () => ({}),
+  (state, ownProps) => ({
+    favorites: state.users.favorites,
+  }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch)}),
 )(GetSong);

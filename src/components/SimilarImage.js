@@ -18,7 +18,7 @@ const UserOptionsDisplay = ({loggedIn, similar, addFavoriteTrack}) => {
 
 class SimilarImage extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
-    this.props.userActions.addFavoriteTrack(artist, track, image);
+    this.props.userActions.addFavoriteTrackThenRedirect(artist, track, image, '/favorites');
   }
 
   render() {

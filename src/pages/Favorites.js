@@ -1,8 +1,9 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import GetFavorites from '../requests/GetFavorites';
+import * as userActions from '../actions/users';
+import {bindActionCreators} from 'redux';
 
-const FavoritesDisplay = ({favorites}) => {
+const FavoritesDisplay = ({favorites, removeFavoriteTrack}) => {
   if (favorites){
     return(
       <div>
@@ -10,12 +11,15 @@ const FavoritesDisplay = ({favorites}) => {
       favorites.map((favorite, key)=>
         <div key={key}>
           <img src={favorite.image} alt="favorite"/>
-        <div>
-          {favorite.artist}
-        </div>
-        <div>
-          {favorite.track}
-        </div>
+          <div>
+            {favorite.artist}
+          </div>
+          <div>
+            {favorite.track}
+          </div>
+          <div onClick={()=>removeFavoriteTrack(favorite.artist, favorite.track)}>
+            Remove Favorite Track
+          </div>
         </div>
       )}
       </div>
@@ -28,6 +32,11 @@ const FavoritesDisplay = ({favorites}) => {
 
 
 class CheckStatus extends React.Component {
+
+  removeFavoriteTrack=(artist, track)=> {
+    this.props.userActions.removeFavoriteTrackThenRedirect(artist, track, '/');
+  }
+
   render() {
 
     const {
@@ -37,9 +46,9 @@ class CheckStatus extends React.Component {
 
     return loggedIn ? (
       <div>
-        <GetFavorites />
         <FavoritesDisplay
           favorites={favorites}
+          removeFavoriteTrack = {this.removeFavoriteTrack}
         />
       </div>
     )
@@ -53,5 +62,6 @@ export default connect(
     favorites: state.users.favorites,
   }),
   dispatch => ({
+    userActions: bindActionCreators(userActions, dispatch),
   }),
 )(CheckStatus);

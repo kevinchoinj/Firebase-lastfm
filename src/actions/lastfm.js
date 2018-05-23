@@ -59,8 +59,13 @@ const requestSimilar = (values) => (dispatch, getState) => {
     "&api_key="+apiKey+"&format=json");
 	  ourRequest.onload = function(){
 		if (ourRequest.status >= 200 && ourRequest.status < 400){
-			let parsed = JSON.parse(ourRequest.responseText);
-      dispatch(receiveSimilar(values, parsed));
+      let parsed = JSON.parse(ourRequest.responseText);
+      if (parsed) {
+        dispatch(receiveSimilar(values, parsed));
+      }
+      else {
+        dispatch(receiveTrack(values));
+      }
 		}
 		else{
       console.log("connected to server, but returned error.");
