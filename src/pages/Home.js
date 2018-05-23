@@ -1,18 +1,22 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as authActions from '../actions/authentication';
+import * as lastfmActions from '../actions/lastfm';
 import TrackImage from '../components/TrackImage';
 import SimilarImage from '../components/SimilarImage';
+import LastfmUsernameForm from '../forms/LastfmUsernameForm';
 
 class Home extends React.Component {
-  signOut=()=> {
-    this.props.authActions.signOutUser();
+  onSubmit=values=> {
+    this.props.lastfmActions.setLastfmUsername(values);
   }
 
   render() {
     return (
       <div>
+        <LastfmUsernameForm
+          onSubmit={this.onSubmit}
+        />
         <TrackImage/>
         <SimilarImage/>
       </div>
@@ -23,6 +27,6 @@ class Home extends React.Component {
 export default connect(
   () => ({}),
   dispatch => ({
-    authActions: bindActionCreators(authActions, dispatch),
+    lastfmActions: bindActionCreators(lastfmActions, dispatch),
   }),
 )(Home);

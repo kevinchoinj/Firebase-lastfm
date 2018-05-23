@@ -3,6 +3,7 @@ let apiKey= json.loginid;
 
 export const RECEIVE_TRACK = 'RECEIVE_TRACK';
 export const RECEIVE_SIMILAR = 'RECEIVE_SIMILAR';
+export const SET_LASTFM_USERNAME = 'SET_LASTFM_USERNAME';
 
 export const getCurrentTrack = (values) => (dispatch, getState) =>
   dispatch(requestTrack(values))
@@ -89,5 +90,12 @@ export function receiveSimilar(track, similar) {
     type: RECEIVE_SIMILAR,
     track: track.recenttracks.track,
     similar: similar.similartracks.track,
+  }
+}
+
+export function setLastfmUsername(values) {
+  return {
+    type: SET_LASTFM_USERNAME,
+    values: values,
   }
 }

@@ -2,21 +2,32 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/users';
 import {bindActionCreators} from 'redux';
+import filled from '../media/filled.png';
+import unfilled from '../media/unfilled.png';
 
-const UserOptionsDisplay = ({loggedIn, similar, addFavoriteTrack, favorites}) => {
+const UserOptionsDisplay = ({
+  loggedIn,
+  similar,
+  addFavoriteTrack,
+  removeFavoriteTrack,
+  favorites,
+  }) => {
   if (loggedIn){
     return favorites ? (
-      <div
-        onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}
-      >
-        Add to favorites
-        {`${similar.artist.name}-${similar.name}`}
-        {
-          favorites.hasOwnProperty(`${similar.artist.name}-${similar.name}`) ?
-          <div>is favorited</div>
+      <div>
+        {favorites.hasOwnProperty(`${similar.artist.name}-${similar.name}`) ?
+          <img
+            src={filled}
+            onClick={()=>removeFavoriteTrack(similar.artist.name, similar.name)}
+            alt="filled"
+          />
           :
-          <div>not favorited</div>
-      }
+          <img
+            src={unfilled}
+            onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}
+            alt="unfilled"
+          />
+        }
       </div>
     ):null
   }
@@ -27,9 +38,11 @@ const UserOptionsDisplay = ({loggedIn, similar, addFavoriteTrack, favorites}) =>
 
 class SimilarImage extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
-    this.props.userActions.addFavoriteTrack(artist, track, image, '/favorites');
+    this.props.userActions.addFavoriteTrack(artist, track, image);
   }
-
+  removeFavoriteTrack=(artist, track)=> {
+    this.props.userActions.removeFavoriteTrack(artist, track);
+  }
   render() {
 
     const {
@@ -52,6 +65,7 @@ class SimilarImage extends React.Component {
             <UserOptionsDisplay
               loggedIn={loggedIn}
               addFavoriteTrack = {this.addFavoriteTrack}
+              removeFavoriteTrack={this.removeFavoriteTrack}
               similar={similar}
               favorites={favorites}
             />
