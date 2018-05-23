@@ -3,13 +3,22 @@ import {connect} from 'react-redux';
 import * as userActions from '../actions/users';
 import {bindActionCreators} from 'redux';
 
-const UserOptionsDisplay = ({loggedIn, similar, addFavoriteTrack}) => {
+const UserOptionsDisplay = ({loggedIn, similar, addFavoriteTrack, favorites}) => {
   if (loggedIn){
-    return (
-      <div onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}>
+    return favorites ? (
+      <div
+        onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}
+      >
         Add to favorites
+        {`${similar.artist.name}-${similar.name}`}
+        {
+          favorites.hasOwnProperty(`${similar.artist.name}-${similar.name}`) ?
+          <div>is favorited</div>
+          :
+          <div>not favorited</div>
+      }
       </div>
-    )
+    ):null
   }
   else {
     return null;
@@ -18,7 +27,7 @@ const UserOptionsDisplay = ({loggedIn, similar, addFavoriteTrack}) => {
 
 class SimilarImage extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
-    this.props.userActions.addFavoriteTrackThenRedirect(artist, track, image, '/favorites');
+    this.props.userActions.addFavoriteTrack(artist, track, image, '/favorites');
   }
 
   render() {
@@ -26,6 +35,7 @@ class SimilarImage extends React.Component {
     const {
       currentSimilar,
       loggedIn,
+      favorites,
     } = this.props;
 
     return currentSimilar ? (
@@ -43,6 +53,7 @@ class SimilarImage extends React.Component {
               loggedIn={loggedIn}
               addFavoriteTrack = {this.addFavoriteTrack}
               similar={similar}
+              favorites={favorites}
             />
           </div>
         )}
@@ -55,6 +66,7 @@ class SimilarImage extends React.Component {
 export default connect(
   (state, ownProps) => ({
     currentSimilar: state.lastfm.currentSimilar,
+    favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
   }),
   dispatch => ({

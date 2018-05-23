@@ -7,21 +7,23 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack}) => {
   if (favorites){
     return(
       <div>
-        {
-      favorites.map((favorite, key)=>
-        <div key={key}>
-          <img src={favorite.image} alt="favorite"/>
-          <div>
-            {favorite.artist}
+        {Object.entries(favorites).map((favorite, key)=>
+          <div key={key}>
+            <img src={favorite[1].image} alt="favorite"/>
+            <div>
+              {favorite[1].artist}
+            </div>
+            <div>
+              {favorite[1].track}
+            </div>
+            <div onClick={()=>removeFavoriteTrack(
+              favorite[1].artist,
+              favorite[1].track)}
+            >
+              Remove Favorite Track
+            </div>
           </div>
-          <div>
-            {favorite.track}
-          </div>
-          <div onClick={()=>removeFavoriteTrack(favorite.artist, favorite.track)}>
-            Remove Favorite Track
-          </div>
-        </div>
-      )}
+        )}
       </div>
     )
   }

@@ -12,7 +12,8 @@ export default(state=DEFAULT_STATE, payload)=>
       let favoritesArray = [];
       for( let i in payload.payload ) {
         if (payload.payload.hasOwnProperty(i)){
-          favoritesArray.push(payload.payload[i]);
+          //favoritesArray.push({[`${payload.payload[i].artist}-${payload.payload[i].track}`]:payload.payload[i]});
+          favoritesArray[`${payload.payload[i].artist}-${payload.payload[i].track}`] = payload.payload[i];
         }
       }
       return {
