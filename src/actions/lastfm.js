@@ -122,10 +122,16 @@ export function receiveTrack(data) {
 }
 
 export function receiveSimilar(track, similar) {
-  return {
+  if (similar.similartracks){
+    return {
+      type: RECEIVE_SIMILAR,
+      track: track.recenttracks.track,
+      similar: similar.similartracks.track,
+    }
+  }
+  else return{
     type: RECEIVE_SIMILAR,
     track: track.recenttracks.track,
-    similar: similar.similartracks.track,
   }
 }
 export function clearSimilarOfTrack(){

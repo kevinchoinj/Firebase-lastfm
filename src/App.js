@@ -8,8 +8,7 @@ import Admin from './pages/Admin';
 import DefaultPage from './pages/DefaultPage';
 import Favorites from './pages/Favorites';
 
-import CheckStatus from './components/CheckStatus';
-import Navbar from './components/Navbar';
+import MenuWrap from './menu/MenuWrap';
 
 import SetUser from './requests/SetUser';
 import GetPages from './requests/GetPages';
@@ -21,9 +20,8 @@ class App extends Component {
       <div className="App">
         <SetUser/>
         <GetPages/>
-        <CheckStatus/>
         <GetSong/>
-        <Navbar/>
+        <MenuWrap/>
         <Switch>
           <Route
             exact path="/"

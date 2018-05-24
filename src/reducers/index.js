@@ -3,6 +3,7 @@ import authentication from './authentication';
 import pages from './pages';
 import lastfm from './lastfm';
 import users from './users';
+import menu from './menu';
 
 const reducers={
   form: reducerForm,
@@ -10,6 +11,7 @@ const reducers={
   pages,
   lastfm,
   users,
+  menu,
 };
 
 export default reducers;
