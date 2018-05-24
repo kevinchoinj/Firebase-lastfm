@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/users';
+import * as lastfmActions from '../actions/lastfm';
 import {bindActionCreators} from 'redux';
 import filled from '../media/filled.png';
 import unfilled from '../media/unfilled.png';
@@ -43,6 +44,9 @@ class SimilarImage extends React.Component {
   removeFavoriteTrack=(artist, track)=> {
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
+  requestSimilarOfTrack=(values)=> {
+    this.props.lastfmActions.requestSimilarOfTrack(values);
+  }
   render() {
 
     const {
@@ -55,7 +59,11 @@ class SimilarImage extends React.Component {
       <div>
         {currentSimilar.map((similar, key) =>
           <div key={key}>
-            <img src={similar.image[3]["#text"]} alt="similar"/>
+            <img
+              src={similar.image[3]["#text"]}
+              alt="similar"
+              onClick={()=>this.requestSimilarOfTrack({artist: similar.artist.name, track: similar.name})}
+            />
             <div>
               {similar.artist.name}
             </div>
@@ -85,5 +93,6 @@ export default connect(
   }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),
+    lastfmActions: bindActionCreators(lastfmActions, dispatch),
   }),
 )(SimilarImage);

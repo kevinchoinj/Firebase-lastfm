@@ -4,6 +4,8 @@ let apiKey= json.loginid;
 export const RECEIVE_TRACK = 'RECEIVE_TRACK';
 export const RECEIVE_SIMILAR = 'RECEIVE_SIMILAR';
 export const SET_LASTFM_USERNAME = 'SET_LASTFM_USERNAME';
+export const CLEAR_SIMILAR_OF_TRACK = 'CLEAR_SIMILAR_OF_TRACK';
+export const RECEIVE_SIMILAR_OF_TRACK = 'RECEIVE_SIMILAR_OF_TRACK';
 
 export const getCurrentTrack = (values) => (dispatch, getState) =>
   dispatch(requestTrack(values))
@@ -78,6 +80,40 @@ const requestSimilar = (values) => (dispatch, getState) => {
 	return ourRequest.send();
 }
 
+export const requestSimilarOfTrack = (values) => (dispatch, getState) => {
+  let ourRequest = new XMLHttpRequest();
+  ourRequest.open('Get',
+    "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&limit=6&artist="
+    +
+    values.artist
+    +
+    "&track="
+    +
+    values.track
+    +
+    "&api_key="+apiKey+"&format=json");
+	  ourRequest.onload = function(){
+		if (ourRequest.status >= 200 && ourRequest.status < 400){
+      let parsed = JSON.parse(ourRequest.responseText);
+      if (parsed) {
+        dispatch(receiveSimilarOfTrack(parsed));
+      }
+      else {
+
+      }
+		}
+		else{
+      console.log("connected to server, but returned error.");
+		}
+	};
+	ourRequest.onerror = function(){
+    console.log("Connection error");
+	}
+	return ourRequest.send();
+}
+
+
+
 export function receiveTrack(data) {
   return {
     type: RECEIVE_TRACK,
@@ -90,6 +126,17 @@ export function receiveSimilar(track, similar) {
     type: RECEIVE_SIMILAR,
     track: track.recenttracks.track,
     similar: similar.similartracks.track,
+  }
+}
+export function clearSimilarOfTrack(){
+  return {
+    type: CLEAR_SIMILAR_OF_TRACK,
+  }
+}
+export function receiveSimilarOfTrack(data) {
+  return {
+    type: RECEIVE_SIMILAR_OF_TRACK,
+    data: data,
   }
 }
 
