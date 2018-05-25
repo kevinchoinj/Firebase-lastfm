@@ -28,7 +28,7 @@ const UserOptionsDisplay = ({
           <img
             className="favorite_icon"
             src={unfilled}
-            onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}
+            onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[2]["#text"])}
             alt="unfilled"
           />
         }
@@ -65,12 +65,12 @@ class SimilarImage extends React.Component {
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
             <img
-              src={similar.image[3]["#text"]}
+              src={similar.image[2]["#text"]}
               alt="similar"
               onClick={()=>this.requestSimilarOfTrack({
                 artist: similar.artist.name,
                 track: similar.name,
-                image: similar.image[3]["#text"],
+                image: similar.image[2]["#text"],
               })}
               className="full_width clickable"
             />
@@ -91,7 +91,14 @@ class SimilarImage extends React.Component {
         )}
       </div>
     )
-    :null;
+    :
+    (
+      <div className="favorite_panel__inner">
+        <div className="panel_notfound">
+          Similar tracks not found
+        </div>
+      </div>
+    );
   }
 }
 

@@ -33,11 +33,29 @@ const  requestTrack = (values) => (dispatch, getState) => {
 
 const  requestTrackThenRequestSimilar = (values) => (dispatch, getState) => {
   let ourRequest = new XMLHttpRequest();
-	ourRequest.open('Get', "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user="+values.username+"&api_key="+apiKey+"&limit=1&format=json")
+  ourRequest.open('Get', "http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user="
+    +
+    values.username
+    +
+    "&api_key="
+    +apiKey
+    +
+    "&limit=1&format=json")
 	ourRequest.onload = function(){
 		if (ourRequest.status >= 200 && ourRequest.status < 400){
-			let parsed = JSON.parse(ourRequest.responseText);
-      dispatch(requestSimilar(parsed));
+      let parsed = JSON.parse(ourRequest.responseText);
+      if (getState().lastfm.currentTrack){
+        if (
+          (getState().lastfm.currentTrack.name !== parsed.recenttracks.track["0"].name)
+          &&
+          (getState().lastfm.currentTrack.artist["#text"] !== parsed.recenttracks.track["0"].artist["#text"])
+        ){
+          dispatch(requestSimilar(parsed));
+        }
+      }
+      else {
+        dispatch(requestSimilar(parsed));
+      }
 		}
 		else{
       console.log("connected to server, but returned error.");

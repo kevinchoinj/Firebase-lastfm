@@ -35,7 +35,7 @@
 
 .favorite_panel {
   width: 75%;
-  height: 100%;
+  height: 100vh;
   background-color: #333;
   position: fixed;
   right: -75%;
@@ -101,4 +101,9 @@
 
 .similar_base__container {
   display: flex;
+}
+
+.panel_notfound {
+  margin: 25px;
+  font-size: 48px;
 }

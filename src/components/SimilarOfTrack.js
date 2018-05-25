@@ -29,7 +29,7 @@ const UserOptionsDisplay = ({
           <img
             className="favorite_icon"
             src={unfilled}
-            onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}
+            onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[2]["#text"])}
             alt="unfilled"
           />
         }
@@ -62,67 +62,64 @@ class SimilarOfTrack extends React.Component {
       similarBase,
     } = this.props;
 
-    const panelName = classNames(
-      'favorite_panel',
-      {
-        'favorite_panel--display': isActive
-      }
-    );
 
     return currentSimilar ? (
-      <div className={panelName}>
-        <CloseButton />
-        <div className="favorite_panel__inner">
-
-          <div className="similar_base__container">
-            <div className="similar_container">
-              <img
-                src={similarBase.image}
-                alt="similar"
-                className="full_width"
-              />
+      <div className="favorite_panel__inner">
+        <div className="similar_base__container">
+          <div className="similar_container">
+            <img
+              src={similarBase.image}
+              alt="similar"
+              className="full_width"
+            />
+          </div>
+          <div className="similar_container">
+            <div>
+              {similarBase.artist}
             </div>
-            <div className="similar_container">
-              <div>
-                {similarBase.artist}
-              </div>
-              <div>
-                {similarBase.track}
-              </div>
+            <div>
+              {similarBase.track}
             </div>
           </div>
-
-          {currentSimilar.map((similar, key) =>
-            <div key={key} className="similar_container">
-              <img
-                src={similar.image[3]["#text"]}
-                alt="similar"
-                onClick={()=>this.requestSimilarOfTrack({
-                  artist: similar.artist.name,
-                  track: similar.name,
-                  image: similar.image[3]["#text"],
-                })}
-                className="full_width clickable"
-              />
-              <div>
-                {similar.artist.name}
-              </div>
-              <div>
-                {similar.name}
-              </div>
-              <UserOptionsDisplay
-                loggedIn={loggedIn}
-                addFavoriteTrack = {this.addFavoriteTrack}
-                removeFavoriteTrack={this.removeFavoriteTrack}
-                similar={similar}
-                favorites={favorites}
-              />
-            </div>
-          )}
         </div>
+
+        {currentSimilar.map((similar, key) =>
+          <div key={key} className="similar_container">
+            <img
+              src={similar.image[2]["#text"]}
+              alt="similar"
+              onClick={()=>this.requestSimilarOfTrack({
+                artist: similar.artist.name,
+                track: similar.name,
+                image: similar.image[2]["#text"],
+              })}
+              className="full_width clickable"
+            />
+            <div>
+              {similar.artist.name}
+            </div>
+            <div>
+              {similar.name}
+            </div>
+            <UserOptionsDisplay
+              loggedIn={loggedIn}
+              addFavoriteTrack = {this.addFavoriteTrack}
+              removeFavoriteTrack={this.removeFavoriteTrack}
+              similar={similar}
+              favorites={favorites}
+            />
+          </div>
+        )}
       </div>
     )
-    :null;
+    :
+    (
+      <div className="favorite_panel__inner">
+        <div className="panel_notfound">
+          Similar tracks not found
+        </div>
+      </div>
+    );
   }
 }
 
