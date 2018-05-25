@@ -24,7 +24,7 @@ const LoginDisplay = ({loggedIn, signOut, toggleMenu}) => {
         >
           Log Out
         </div>
-        </div>
+      </div>
     )
   }
   else {

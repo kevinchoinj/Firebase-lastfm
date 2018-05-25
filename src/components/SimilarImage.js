@@ -18,12 +18,14 @@ const UserOptionsDisplay = ({
       <div>
         {favorites.hasOwnProperty(`${similar.artist.name}-${similar.name}`) ?
           <img
+            className="favorite_icon"
             src={filled}
             onClick={()=>removeFavoriteTrack(similar.artist.name, similar.name)}
             alt="filled"
           />
           :
           <img
+            className="favorite_icon"
             src={unfilled}
             onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[3]["#text"])}
             alt="unfilled"
@@ -56,13 +58,14 @@ class SimilarImage extends React.Component {
     } = this.props;
 
     return currentSimilar ? (
-      <div>
+      <div className="favorite_panel__inner">
         {currentSimilar.map((similar, key) =>
-          <div key={key}>
+          <div key={key} className="similar_container">
             <img
               src={similar.image[3]["#text"]}
               alt="similar"
               onClick={()=>this.requestSimilarOfTrack({artist: similar.artist.name, track: similar.name})}
+              className="full_width"
             />
             <div>
               {similar.artist.name}

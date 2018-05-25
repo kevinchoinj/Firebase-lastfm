@@ -51,7 +51,7 @@ const  requestTrackThenRequestSimilar = (values) => (dispatch, getState) => {
 const requestSimilar = (values) => (dispatch, getState) => {
   let ourRequest = new XMLHttpRequest();
   ourRequest.open('Get',
-    "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&limit=6&artist="
+    "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&limit=12&artist="
     +
     values.recenttracks.track["0"].artist["#text"]
     +
@@ -83,7 +83,7 @@ const requestSimilar = (values) => (dispatch, getState) => {
 export const requestSimilarOfTrack = (values) => (dispatch, getState) => {
   let ourRequest = new XMLHttpRequest();
   ourRequest.open('Get',
-    "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&limit=6&artist="
+    "http://ws.audioscrobbler.com/2.0/?method=track.getsimilar&limit=12&artist="
     +
     values.artist
     +

@@ -22,6 +22,7 @@ const UserOptionsDisplay = ({
               onClick={()=>removeFavoriteTrack(currentTrack.artist["#text"], currentTrack.name)}
               src={filled}
               alt="filled"
+              className="favorite_icon"
             />
           </div>
           :
@@ -30,6 +31,7 @@ const UserOptionsDisplay = ({
               src={unfilled}
               onClick={()=>addFavoriteTrack(currentTrack.artist["#text"], currentTrack.name, currentTrack.image[3]["#text"])}
               alt="unfilled"
+              className="favorite_icon"
             />
           </div>
         ]
@@ -58,9 +60,13 @@ class TrackImage extends React.Component {
     } = this.props;
 
     return currentTrack ? (
-      <div>
+      <div className="current_container">
         {currentTrack.image[3]?
-        <img src={currentTrack.image[3]["#text"]} alt="track"/>
+        <img
+          src={currentTrack.image[3]["#text"]}
+          alt="track"
+          className="full_width"
+        />
         :null}
         <div>
         {currentTrack.artist["#text"]}

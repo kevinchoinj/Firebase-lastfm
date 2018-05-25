@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './style/index.css';
 import './style/menu.css';
+import './style/home.css';
 
 import App from './App';
 

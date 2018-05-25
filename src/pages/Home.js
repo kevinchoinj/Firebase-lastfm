@@ -5,6 +5,7 @@ import * as lastfmActions from '../actions/lastfm';
 import TrackImage from '../components/TrackImage';
 import SimilarImage from '../components/SimilarImage';
 import LastfmUsernameForm from '../forms/LastfmUsernameForm';
+import {Link} from 'react-router-dom';
 
 class Home extends React.Component {
   onSubmit=values=> {
@@ -14,11 +15,21 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <LastfmUsernameForm
-          onSubmit={this.onSubmit}
-        />
-        <TrackImage/>
-        <SimilarImage/>
+        <div className="side_left">
+          <LastfmUsernameForm
+            onSubmit={this.onSubmit}
+          />
+          <TrackImage/>
+          <Link to="/">
+          Home
+          </Link>
+          <Link to="/favorites">
+          Favorites
+          </Link>
+        </div>
+        <div className="side_right">
+          <SimilarImage/>
+        </div>
       </div>
     );
   }

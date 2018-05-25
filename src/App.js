@@ -22,11 +22,15 @@ class App extends Component {
         <GetPages/>
         <GetSong/>
         <MenuWrap/>
+        <Home />
+        <Route exact path={"/favorites"} children={({ match }) => (
+		      <div>
+		        <Favorites
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
         <Switch>
-          <Route
-            exact path="/"
-            render={(props) => <Home {...props}/>}
-          />
           <Route
             exact path="/register"
             render={(props) => <Register {...props}/>}
@@ -38,10 +42,6 @@ class App extends Component {
           <Route
             exact path="/admin"
             render={(props) => <Admin {...props}/>}
-          />
-          <Route
-            exact path="/favorites"
-            render={(props) => <Favorites {...props}/>}
           />
           <Route
             path="/test/:id"
