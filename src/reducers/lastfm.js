@@ -4,6 +4,7 @@ import {
   SET_LASTFM_USERNAME,
   CLEAR_SIMILAR_OF_TRACK,
   RECEIVE_SIMILAR_OF_TRACK,
+  SET_SIMILAR_OF_TRACK,
 } from '../actions/lastfm'
 
 const DEFAULT_STATE={
@@ -11,6 +12,7 @@ const DEFAULT_STATE={
   currentSimilar: null,
   lastfmUsername: 'shodyra',
   similarOfTrack: null,
+  similarOfBase : null,
 }
 
 let trackArray = [];
@@ -58,6 +60,11 @@ export default(state=DEFAULT_STATE, payload)=>
       return {
         ...state,
         similarOfTrack: null,
+      };
+    case SET_SIMILAR_OF_TRACK:
+      return {
+        ...state,
+        similarOfBase: payload.payload,
       };
    default:
       return state;

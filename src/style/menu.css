@@ -24,7 +24,7 @@
   position: fixed;
   bottom: 80px;
   left: 25px;
-  
+
   -webkit-transition: .8s ease-out;
   -moz-transition: .8s ease-out;
   -o-transition: .8s ease-out;
@@ -46,6 +46,7 @@
   -moz-transition: .4s ease-out;
   -o-transition: .4s ease-out;
   transition: .4s ease-out;
+  cursor: pointer;
 }
 .menu_panel__link:hover,
 .menu_panel__link:focus{
@@ -149,7 +150,7 @@
   .menu_panel{
     height: 100vh;
     width: 100vw;
-  
+
     left: 0px;
     bottom: 0px;
     transform: rotate(0deg);

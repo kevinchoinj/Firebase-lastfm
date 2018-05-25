@@ -48,6 +48,7 @@ class SimilarImage extends React.Component {
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
   requestSimilarOfTrack = (values) => {
+    this.props.lastfmActions.setSimilarOfTrack(values);
     this.props.lastfmActions.requestSimilarOfTrack(values);
     this.props.pagesActions.toggleSimilarOfTrack(true);
   }
@@ -66,7 +67,11 @@ class SimilarImage extends React.Component {
             <img
               src={similar.image[3]["#text"]}
               alt="similar"
-              onClick={()=>this.requestSimilarOfTrack({artist: similar.artist.name, track: similar.name})}
+              onClick={()=>this.requestSimilarOfTrack({
+                artist: similar.artist.name,
+                track: similar.name,
+                image: similar.image[3]["#text"],
+              })}
               className="full_width clickable"
             />
             <div>

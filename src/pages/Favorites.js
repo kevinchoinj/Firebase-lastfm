@@ -18,8 +18,10 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack
               alt="favorite"
               onClick={()=>requestSimilarOfTrack({
                 artist: favorite[1].artist,
-                track: favorite[1].track
+                track: favorite[1].track,
+                image: favorite[1].image,
               })}
+              className="full_width clickable"
             />
             <div>
               {favorite[1].artist}
@@ -54,6 +56,7 @@ class CheckStatus extends React.Component {
     this.props.userActions.removeFavoriteTrack(artist, track, '/');
   }
   requestSimilarOfTrack = (values) => {
+    this.props.lastfmActions.setSimilarOfTrack(values);
     this.props.lastfmActions.requestSimilarOfTrack(values);
     this.props.pagesActions.toggleSimilarOfTrack(true);
   }

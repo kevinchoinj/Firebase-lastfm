@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import * as lastfmActions from '../actions/lastfm';
 import TrackImage from '../components/TrackImage';
 import SimilarImage from '../components/SimilarImage';
+import HomeNav from '../components/HomeNav';
 import LastfmUsernameForm from '../forms/LastfmUsernameForm';
 import {Link} from 'react-router-dom';
 import * as pagesActions from '../actions/pages';
@@ -23,18 +24,7 @@ class Home extends React.Component {
             onSubmit={this.onSubmit}
           />
           <TrackImage/>
-          <Link
-            to="/"
-            onClick={this.toggleSimilarOfTrack}
-          >
-          Home
-          </Link>
-          <Link
-            to="/favorites"
-            onClick={this.toggleSimilarOfTrack}
-          >
-          Favorites
-          </Link>
+          <HomeNav/>
         </div>
         <div className="side_right">
           <SimilarImage/>

@@ -6,6 +6,7 @@ export const RECEIVE_SIMILAR = 'RECEIVE_SIMILAR';
 export const SET_LASTFM_USERNAME = 'SET_LASTFM_USERNAME';
 export const CLEAR_SIMILAR_OF_TRACK = 'CLEAR_SIMILAR_OF_TRACK';
 export const RECEIVE_SIMILAR_OF_TRACK = 'RECEIVE_SIMILAR_OF_TRACK';
+export const SET_SIMILAR_OF_TRACK = 'SET_SIMILAR_OF_TRACK';
 
 export const getCurrentTrack = (values) => (dispatch, getState) =>
   dispatch(requestTrack(values))
@@ -112,7 +113,12 @@ export const requestSimilarOfTrack = (values) => (dispatch, getState) => {
 	return ourRequest.send();
 }
 
-
+export function setSimilarOfTrack(data){
+  return {
+    type: SET_SIMILAR_OF_TRACK,
+    payload: data,
+  }
+}
 
 export function receiveTrack(data) {
   return {

@@ -49,6 +49,7 @@ class SimilarOfTrack extends React.Component {
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
   requestSimilarOfTrack=(values)=> {
+    this.props.lastfmActions.setSimilarOfTrack(values);
     this.props.lastfmActions.requestSimilarOfTrack(values);
   }
   render() {
@@ -58,6 +59,7 @@ class SimilarOfTrack extends React.Component {
       loggedIn,
       favorites,
       isActive,
+      similarBase,
     } = this.props;
 
     const panelName = classNames(
@@ -71,12 +73,35 @@ class SimilarOfTrack extends React.Component {
       <div className={panelName}>
         <CloseButton />
         <div className="favorite_panel__inner">
+
+          <div className="similar_base__container">
+            <div className="similar_container">
+              <img
+                src={similarBase.image}
+                alt="similar"
+                className="full_width"
+              />
+            </div>
+            <div className="similar_container">
+              <div>
+                {similarBase.artist}
+              </div>
+              <div>
+                {similarBase.track}
+              </div>
+            </div>
+          </div>
+
           {currentSimilar.map((similar, key) =>
             <div key={key} className="similar_container">
               <img
                 src={similar.image[3]["#text"]}
                 alt="similar"
-                onClick={()=>this.requestSimilarOfTrack({artist: similar.artist.name, track: similar.name})}
+                onClick={()=>this.requestSimilarOfTrack({
+                  artist: similar.artist.name,
+                  track: similar.name,
+                  image: similar.image[3]["#text"],
+                })}
                 className="full_width clickable"
               />
               <div>
@@ -107,6 +132,7 @@ export default connect(
     favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
     isActive: state.pages.similarOfTrack,
+    similarBase: state.lastfm.similarOfBase,
   }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),

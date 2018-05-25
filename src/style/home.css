@@ -1,6 +1,6 @@
 .similar_container {
   display: inline-block;
-  width: calc(33% - 50px);
+  width: calc(25% - 50px);
   margin: 25px;
   vertical-align: top;
 }
@@ -97,4 +97,8 @@
   -moz-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
   transform: rotate(-45deg);
+}
+
+.similar_base__container {
+  display: flex;
 }
