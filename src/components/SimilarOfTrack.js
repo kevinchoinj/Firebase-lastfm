@@ -2,10 +2,11 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/users';
 import * as lastfmActions from '../actions/lastfm';
-import * as pagesActions from '../actions/pages';
 import {bindActionCreators} from 'redux';
+import classNames from 'classnames';
 import filled from '../media/filled.png';
 import unfilled from '../media/unfilled.png';
+import CloseButton from './CloseButton';
 
 const UserOptionsDisplay = ({
   loggedIn,
@@ -40,16 +41,15 @@ const UserOptionsDisplay = ({
   }
 };
 
-class SimilarImage extends React.Component {
+class SimilarOfTrack extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
     this.props.userActions.addFavoriteTrack(artist, track, image);
   }
   removeFavoriteTrack=(artist, track)=> {
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
-  requestSimilarOfTrack = (values) => {
+  requestSimilarOfTrack=(values)=> {
     this.props.lastfmActions.requestSimilarOfTrack(values);
-    this.props.pagesActions.toggleSimilarOfTrack(true);
   }
   render() {
 
@@ -57,33 +57,44 @@ class SimilarImage extends React.Component {
       currentSimilar,
       loggedIn,
       favorites,
+      isActive,
     } = this.props;
 
+    const panelName = classNames(
+      'favorite_panel',
+      {
+        'favorite_panel--display': isActive
+      }
+    );
+
     return currentSimilar ? (
-      <div className="favorite_panel__inner">
-        {currentSimilar.map((similar, key) =>
-          <div key={key} className="similar_container">
-            <img
-              src={similar.image[3]["#text"]}
-              alt="similar"
-              onClick={()=>this.requestSimilarOfTrack({artist: similar.artist.name, track: similar.name})}
-              className="full_width clickable"
-            />
-            <div>
-              {similar.artist.name}
+      <div className={panelName}>
+        <CloseButton />
+        <div className="favorite_panel__inner">
+          {currentSimilar.map((similar, key) =>
+            <div key={key} className="similar_container">
+              <img
+                src={similar.image[3]["#text"]}
+                alt="similar"
+                onClick={()=>this.requestSimilarOfTrack({artist: similar.artist.name, track: similar.name})}
+                className="full_width clickable"
+              />
+              <div>
+                {similar.artist.name}
+              </div>
+              <div>
+                {similar.name}
+              </div>
+              <UserOptionsDisplay
+                loggedIn={loggedIn}
+                addFavoriteTrack = {this.addFavoriteTrack}
+                removeFavoriteTrack={this.removeFavoriteTrack}
+                similar={similar}
+                favorites={favorites}
+              />
             </div>
-            <div>
-              {similar.name}
-            </div>
-            <UserOptionsDisplay
-              loggedIn={loggedIn}
-              addFavoriteTrack = {this.addFavoriteTrack}
-              removeFavoriteTrack={this.removeFavoriteTrack}
-              similar={similar}
-              favorites={favorites}
-            />
-          </div>
-        )}
+          )}
+        </div>
       </div>
     )
     :null;
@@ -92,13 +103,13 @@ class SimilarImage extends React.Component {
 
 export default connect(
   (state, ownProps) => ({
-    currentSimilar: state.lastfm.currentSimilar,
+    currentSimilar: state.lastfm.similarOfTrack,
     favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
+    isActive: state.pages.similarOfTrack,
   }),
   dispatch => ({
-    pagesActions: bindActionCreators(pagesActions, dispatch),
     userActions: bindActionCreators(userActions, dispatch),
     lastfmActions: bindActionCreators(lastfmActions, dispatch),
   }),
-)(SimilarImage);
+)(SimilarOfTrack);

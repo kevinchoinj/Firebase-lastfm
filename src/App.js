@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Admin from './pages/Admin';
 import DefaultPage from './pages/DefaultPage';
 import Favorites from './pages/Favorites';
+import SimilarOfTrack from './components/SimilarOfTrack';
 
 import MenuWrap from './menu/MenuWrap';
 
@@ -30,6 +31,7 @@ class App extends Component {
 		        />
 		      </div>
 		    )}/>
+        <SimilarOfTrack/>
         <Switch>
           <Route
             exact path="/register"

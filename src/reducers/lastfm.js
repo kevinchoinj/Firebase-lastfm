@@ -47,10 +47,13 @@ export default(state=DEFAULT_STATE, payload)=>
         lastfmUsername: payload.values.username,
       };
     case RECEIVE_SIMILAR_OF_TRACK:
-      return {
-        ...state,
-        similarOfTrack: payload.data.similartracks.track,
-      };
+      if (payload.data.similartracks){
+        return {
+          ...state,
+          similarOfTrack: payload.data.similartracks.track,
+        };
+      }
+      else return state;
     case CLEAR_SIMILAR_OF_TRACK:
       return {
         ...state,

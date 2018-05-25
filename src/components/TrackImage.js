@@ -4,13 +4,14 @@ import filled from '../media/filled.png';
 import unfilled from '../media/unfilled.png';
 import * as userActions from '../actions/users';
 import {bindActionCreators} from 'redux';
+import * as pagesActions from '../actions/pages';
 
 const UserOptionsDisplay = ({
   loggedIn,
   currentTrack,
   addFavoriteTrack,
   removeFavoriteTrack,
-  favorites
+  favorites,
   }) => {
   if (loggedIn){
     return currentTrack ? (
@@ -51,6 +52,9 @@ class TrackImage extends React.Component {
   removeFavoriteTrack=(artist, track)=> {
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
+  toggleSimilarOfTrack = () => {
+    this.props.pagesActions.toggleSimilarOfTrack(false);
+  }
   render() {
 
     const {
@@ -66,6 +70,7 @@ class TrackImage extends React.Component {
           src={currentTrack.image[3]["#text"]}
           alt="track"
           className="full_width"
+          onClick = {this.toggleSimilarOfTrack}
         />
         :null}
         <div>
@@ -95,5 +100,6 @@ export default connect(
   }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),
+    pagesActions: bindActionCreators(pagesActions, dispatch),
   }),
 )(TrackImage);
