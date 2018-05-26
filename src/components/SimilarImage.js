@@ -60,7 +60,7 @@ class SimilarImage extends React.Component {
       favorites,
     } = this.props;
 
-    return currentSimilar ? (
+    return currentSimilar && currentSimilar[0] ? (
       <div className="favorite_panel__inner">
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
@@ -74,11 +74,11 @@ class SimilarImage extends React.Component {
               })}
               className="full_width clickable"
             />
-            <div>
-              {similar.artist.name}
-            </div>
-            <div>
+            <div className="track_name">
               {similar.name}
+            </div>
+            <div className="track_artist">
+              {similar.artist.name}
             </div>
             <UserOptionsDisplay
               loggedIn={loggedIn}

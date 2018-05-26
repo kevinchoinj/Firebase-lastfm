@@ -45,7 +45,7 @@ const UserOptionsDisplay = ({
   }
 };
 
-class TrackImage extends React.Component {
+class RecentTracks extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
     this.props.userActions.addFavoriteTrack(artist, track, image);
   }
@@ -58,34 +58,35 @@ class TrackImage extends React.Component {
   render() {
 
     const {
-      currentTrack,
+      recentTracks,
       favorites,
       loggedIn,
     } = this.props;
 
-    return currentTrack ? (
-      <div className="current_container">
-        {currentTrack.image[3]?
-        <img
-          src={currentTrack.image[3]["#text"]}
-          alt="track"
-          className="full_width"
-          onClick = {this.toggleSimilarOfTrack}
-        />
-        :null}
-        <div className="track_name">
-        {currentTrack.name}
+    return recentTracks ? (
+      <div className="recent_tracks__container">
+      <div className="track_name spacing_bottom">
+        Recent Tracks
+      </div>
+      {recentTracks.map((track, key) =>
+        <div key={key} className="recent_tracks__object">
+          <div className="spacing_bottom">
+            <div className="track_name">
+              {track.name}
+            </div>
+            <div className="track_artist">
+              {track.artist["#text"]}
+            </div>
+          </div>
+          <UserOptionsDisplay
+            currentTrack={track}
+            favorites={favorites}
+            addFavoriteTrack={this.addFavoriteTrack}
+            removeFavoriteTrack={this.removeFavoriteTrack}
+            loggedIn={loggedIn}
+          />
         </div>
-        <div className="track_artist">
-        {currentTrack.artist["#text"]}
-        </div>
-        <UserOptionsDisplay
-          currentTrack={currentTrack}
-          favorites={favorites}
-          addFavoriteTrack={this.addFavoriteTrack}
-          removeFavoriteTrack={this.removeFavoriteTrack}
-          loggedIn={loggedIn}
-        />
+      )}
       </div>
     )
     :null;
@@ -95,11 +96,11 @@ class TrackImage extends React.Component {
 export default connect(
   (state, ownProps) => ({
     favorites: state.users.favorites,
-    currentTrack: state.lastfm.currentTrack,
+    recentTracks: state.lastfm.recentTracks,
     loggedIn: state.authentication.loggedIn,
   }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),
     pagesActions: bindActionCreators(pagesActions, dispatch),
   }),
-)(TrackImage);
+)(RecentTracks);

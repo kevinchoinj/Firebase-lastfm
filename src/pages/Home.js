@@ -3,10 +3,10 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as lastfmActions from '../actions/lastfm';
 import TrackImage from '../components/TrackImage';
+import RecentTracks from '../components/RecentTracks';
 import SimilarImage from '../components/SimilarImage';
 import HomeNav from '../components/HomeNav';
 import LastfmUsernameForm from '../forms/LastfmUsernameForm';
-import {Link} from 'react-router-dom';
 import * as pagesActions from '../actions/pages';
 
 class Home extends React.Component {
@@ -17,14 +17,22 @@ class Home extends React.Component {
     this.props.pagesActions.toggleSimilarOfTrack(false);
   }
   render() {
+    const {
+      lastfmUsername,
+    } = this.props;
+
     return (
       <div>
         <div className="side_left">
-          <LastfmUsernameForm
-            onSubmit={this.onSubmit}
-          />
-          <TrackImage/>
-          <HomeNav/>
+          <div className="side_left__inner">
+            <HomeNav/>
+            <LastfmUsernameForm
+              onSubmit={this.onSubmit}
+            />
+            {lastfmUsername}
+            <TrackImage/>
+            <RecentTracks/>
+          </div>
         </div>
         <div className="side_right">
           <SimilarImage/>
@@ -37,6 +45,7 @@ class Home extends React.Component {
 export default connect(
   (state, ownProps) => ({
     isActive: state.pages.similarOfTrack,
+    lastfmUsername: state.lastfm.lastfmUsername,
   }),
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),

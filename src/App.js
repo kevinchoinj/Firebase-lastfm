@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import Home from './pages/Home';
+import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Admin from './pages/Admin';
 import DefaultPage from './pages/DefaultPage';
 import Favorites from './pages/Favorites';
+import FavoritesPanel from './pages/FavoritesPanel';
 import SimilarOfTrackPanel from './components/SimilarOfTrackPanel';
 
 import MenuWrap from './menu/MenuWrap';
@@ -26,7 +28,7 @@ class App extends Component {
         <Home />
         <Route exact path={"/favorites"} children={({ match }) => (
 		      <div>
-		        <Favorites
+		        <FavoritesPanel
               isActive={Boolean(match) ? true : false}
 		        />
 		      </div>
@@ -34,12 +36,20 @@ class App extends Component {
         <SimilarOfTrackPanel/>
         <Switch>
           <Route
+            exact path="/"
+            render={(props) => <HomePage {...props}/>}
+          />
+          <Route
             exact path="/register"
             render={(props) => <Register {...props}/>}
           />
           <Route
             exact path="/login"
             render={(props) => <Login {...props}/>}
+          />
+          <Route
+            exact path="/favorites"
+            render={(props) => <Favorites {...props}/>}
           />
           <Route
             exact path="/admin"

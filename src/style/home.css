@@ -1,14 +1,12 @@
 .similar_container {
   display: inline-block;
   width: calc(25% - 50px);
-  margin: 25px;
+  margin: 10px 25px 15px 25px;
   vertical-align: top;
 }
 .current_container {
   display: inline-block;
-  width: calc(100% - 50px);
-  margin: 25px;
-  vertical-align: top;
+  margin-top: 25px;
 }
 .side_left {
   width: 25%;
@@ -18,6 +16,9 @@
   top: 0px;
   color: #ddd;
   background-color: #666;
+}
+.side_left__inner {
+  padding: 25px;
 }
 .side_right {
   width: 75%;
@@ -55,15 +56,17 @@
 }
 .favorite_icon {
   cursor: pointer;
+  line-height: 20px;
+  vertical-align: middle;
 }
 
 .close_container {
   position: absolute;
   left: 18px;
-   top:18px;
-   cursor: pointer;
-   height:30px;
-   width: 30px;
+  top:18px;
+  cursor: pointer;
+  height:30px;
+  width: 30px;
 }
 .close_line1 {
   background-color: #fff;
@@ -106,4 +109,52 @@
 .panel_notfound {
   margin: 25px;
   font-size: 48px;
+}
+
+.home_nav__link {
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  text-decoration: none;
+  line-height: 150%;
+  font-weight: 600;
+  -webkit-transition: .4s ease-out;
+  -moz-transition: .4s ease-out;
+  -o-transition: .4s ease-out;
+  transition: .4s ease-out;
+}
+.home_nav__link:hover {
+  color: #111;
+}
+.home_nav__link--selected {
+  color: #111;
+}
+.home_nav__link--selected:hover {
+  cursor: default;
+}
+
+.track_name {
+ font-size: 12px;
+ font-weight: 600;
+ line-height: 20px;
+ vertical-align: middle;
+}
+.track_artist {
+  font-size: 12px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.form_label {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.recent_tracks__container {
+  margin-top: 25px;
+  font-size: 12px;
+}
+.recent_tracks__object {
+  display: flex;
+  justify-content: space-between;
 }

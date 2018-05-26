@@ -25,9 +25,9 @@ const LastfmUsernameForm = props => {
   return (
     <form onSubmit={handleSubmit}>
       <div className="spacing_bottom__large">
-        <label className="user_label spacing_bottom">
+        <div className="form_label spacing_bottom">
           Lastfm Username
-        </label>
+        </div>
         <Field
           name="username"
           placeholder="shodyra"

@@ -6,12 +6,12 @@ import classNames from 'classnames';
 import * as authActions from '../actions/authentication';
 import * as pagesActions from '../actions/pages';
 
-const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack}) => {
+const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName}) => {
   if (loggedIn){
     return(
       <div>
         <Link
-          className="menu_panel__link"
+          className={favoritesName}
           to="/favorites"
           onClick={()=>toggleSimilarOfTrack()}
         >
@@ -20,7 +20,7 @@ const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack}) => {
 
         <div
           onClick={()=>signOut()}
-          className="menu_panel__link"
+          className="home_nav__link"
         >
           Log Out
         </div>
@@ -29,26 +29,26 @@ const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack}) => {
   }
   else {
     return (
+    <div>
       <div>
-        <div>
-          <Link
-            className="menu_panel__link"
-            to="/register"
-            onClick={()=>toggleSimilarOfTrack()}
-          >
-            Register
-          </Link>
-        </div>
-        <div>
-          <Link
-            className="menu_panel__link"
-            to="/login"
-            onClick={()=>toggleSimilarOfTrack()}
-          >
-            Log In
-          </Link>
-        </div>
+        <Link
+          className="home_nav__link"
+          to="/register"
+          onClick={()=>toggleSimilarOfTrack()}
+        >
+          Register
+        </Link>
       </div>
+      <div>
+        <Link
+          className="home_nav__link"
+          to="/login"
+          onClick={()=>toggleSimilarOfTrack()}
+        >
+          Log In
+        </Link>
+      </div>
+    </div>
     );
   }
 };
@@ -65,21 +65,36 @@ class HomeNav extends React.Component{
 
     const {
       loggedIn,
-      isHidden,
+      pageName,
     } = this.props;
+
+    const homeName= classNames(
+      'home_nav__link',
+      {
+        'home_nav__link--selected': pageName === "lastfmHome",
+      }
+    );
+
+    const favoritesName= classNames(
+      'home_nav__link',
+      {
+        'home_nav__link--selected': pageName === "lastfmFavorites",
+      }
+    );
+
 
 
     return(
-      <div
-      >
+      <div className="spacing_bottom">
         <Link
-          className="menu_panel__link"
+          className={homeName}
           to="/"
           onClick = {this.toggleSimilarOfTrack}
         >
           Home
         </Link>
         <LoginDisplay
+          favoritesName={favoritesName}
           loggedIn={loggedIn}
           signOut={this.signOut}
           toggleSimilarOfTrack={this.toggleSimilarOfTrack}
@@ -92,6 +107,7 @@ class HomeNav extends React.Component{
 export default connect(
   (state, ownProps) => ({
     loggedIn: state.authentication.loggedIn,
+    pageName: state.pages.pageName,
   }),
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),

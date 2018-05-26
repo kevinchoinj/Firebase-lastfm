@@ -3,9 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as pagesActions from '../actions/pages';
 
-class Home extends React.Component {
+class HomePage extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmFavorites');
+    this.props.pagesActions.setPageName('lastfmHome');
   }
   render() {
     return null;
@@ -18,4 +18,4 @@ export default connect(
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),
   }),
-)(Home);
+)(HomePage);

@@ -4,8 +4,7 @@ import * as userActions from '../actions/users';
 import * as lastfmActions from '../actions/lastfm';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
-import filled from '../media/filled.png';
-import unfilled from '../media/unfilled.png';
+
 import CloseButton from './CloseButton';
 import SimilarOfTrack from './SimilarOfTrack';
 
@@ -23,11 +22,7 @@ class SimilarOfTrackPanel extends React.Component {
   render() {
 
     const {
-      currentSimilar,
-      loggedIn,
-      favorites,
       isActive,
-      similarBase,
     } = this.props;
 
     const panelName = classNames(
@@ -48,11 +43,7 @@ class SimilarOfTrackPanel extends React.Component {
 
 export default connect(
   (state, ownProps) => ({
-    currentSimilar: state.lastfm.similarOfTrack,
-    favorites: state.users.favorites,
-    loggedIn: state.authentication.loggedIn,
     isActive: state.pages.similarOfTrack,
-    similarBase: state.lastfm.similarOfBase,
   }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),

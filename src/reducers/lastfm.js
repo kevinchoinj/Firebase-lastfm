@@ -10,6 +10,7 @@ import {
 const DEFAULT_STATE={
   currentTrack: null,
   currentSimilar: null,
+  recentTracks: null,
   lastfmUsername: 'shodyra',
   similarOfTrack: null,
   similarOfBase : null,
@@ -38,11 +39,20 @@ export default(state=DEFAULT_STATE, payload)=>
           trackArray.push(payload.track[i]);
         }
       }
-      return {
+      if (trackArray[1]){
+        return {
+          ...state,
+          currentSimilar: payload.similar,
+          currentTrack: trackArray[0],
+          recentTracks: trackArray.slice(1, trackArray.length),
+        };
+      }
+      else return {
         ...state,
         currentSimilar: payload.similar,
         currentTrack: trackArray[0],
-      };
+        recentTracks: null,
+      }
     case SET_LASTFM_USERNAME:
       return {
         ...state,

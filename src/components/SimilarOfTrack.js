@@ -3,10 +3,8 @@ import {connect} from 'react-redux';
 import * as userActions from '../actions/users';
 import * as lastfmActions from '../actions/lastfm';
 import {bindActionCreators} from 'redux';
-import classNames from 'classnames';
 import filled from '../media/filled.png';
 import unfilled from '../media/unfilled.png';
-import CloseButton from './CloseButton';
 
 const UserOptionsDisplay = ({
   loggedIn,
@@ -58,7 +56,6 @@ class SimilarOfTrack extends React.Component {
       currentSimilar,
       loggedIn,
       favorites,
-      isActive,
       similarBase,
     } = this.props;
 
@@ -74,11 +71,11 @@ class SimilarOfTrack extends React.Component {
             />
           </div>
           <div className="similar_container">
-            <div>
-              {similarBase.artist}
-            </div>
-            <div>
+            <div className="track_name">
               {similarBase.track}
+            </div>
+            <div className="track_artist">
+              {similarBase.artist}
             </div>
           </div>
         </div>
@@ -95,11 +92,11 @@ class SimilarOfTrack extends React.Component {
               })}
               className="full_width clickable"
             />
-            <div>
-              {similar.artist.name}
-            </div>
-            <div>
+            <div className="track_artist">
               {similar.name}
+            </div>
+            <div className="track_artist">
+              {similar.artist.name}
             </div>
             <UserOptionsDisplay
               loggedIn={loggedIn}
@@ -128,7 +125,6 @@ export default connect(
     currentSimilar: state.lastfm.similarOfTrack,
     favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
-    isActive: state.pages.similarOfTrack,
     similarBase: state.lastfm.similarOfBase,
   }),
   dispatch => ({
