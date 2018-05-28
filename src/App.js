@@ -4,7 +4,9 @@ import {Switch, Route} from 'react-router-dom';
 import Home from './pages/Home';
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
+import LoginPanel from './pages/LoginPanel';
 import Register from './pages/Register';
+import RegisterPanel from './pages/RegisterPanel';
 import Admin from './pages/Admin';
 import DefaultPage from './pages/DefaultPage';
 import Favorites from './pages/Favorites';
@@ -29,6 +31,20 @@ class App extends Component {
         <Route exact path={"/favorites"} children={({ match }) => (
 		      <div>
 		        <FavoritesPanel
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
+        <Route exact path={"/login"} children={({ match }) => (
+		      <div>
+		        <LoginPanel
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
+        <Route exact path={"/register"} children={({ match }) => (
+		      <div>
+		        <RegisterPanel
               isActive={Boolean(match) ? true : false}
 		        />
 		      </div>

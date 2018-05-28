@@ -25,11 +25,15 @@ class Home extends React.Component {
       <div>
         <div className="side_left">
           <div className="side_left__inner">
-            <HomeNav/>
-            <LastfmUsernameForm
-              onSubmit={this.onSubmit}
-            />
-            {lastfmUsername}
+            <div className="home_header">
+              <HomeNav/>
+              <LastfmUsernameForm
+                onSubmit={this.onSubmit}
+              />
+            </div>
+            <div>
+              {lastfmUsername}
+            </div>
             <TrackImage/>
             <RecentTracks/>
           </div>

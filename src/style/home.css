@@ -1,11 +1,11 @@
 .similar_container {
   display: inline-block;
-  width: calc(25% - 50px);
-  margin: 10px 25px 15px 25px;
+  width: calc(16.666% - 50px);
+  margin: 5px 25px 10px 25px;
   vertical-align: top;
 }
 .current_container {
-  display: inline-block;
+  margin: 0 auto;
   margin-top: 25px;
 }
 .side_left {
@@ -53,6 +53,26 @@
 }
 .favorite_panel--display {
   right: 0px;
+}
+.half_panel {
+  width: 37.5%;
+  height: 100vh;
+  background-color: #333;
+  position: fixed;
+  right: -37.5%;
+  top: 0px;
+  color: #ddd;
+  overflow: auto;
+  -webkit-transition: .25s ease-out;
+  -moz-transition: .25s ease-out;
+  -o-transition: .25s ease-out;
+  transition: .25s ease-out;
+}
+.half_panel--display {
+  right: 0px;
+}
+.half_panel__inner {
+   padding: 75px 25px 25px 25px;
 }
 .favorite_icon {
   cursor: pointer;
@@ -157,4 +177,14 @@
 .recent_tracks__object {
   display: flex;
   justify-content: space-between;
+}
+.home_header{
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 992px) {
+  .similar_container {
+    width: calc(25% - 50px);
+  }
 }

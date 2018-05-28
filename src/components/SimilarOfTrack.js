@@ -60,7 +60,7 @@ class SimilarOfTrack extends React.Component {
     } = this.props;
 
 
-    return currentSimilar ? (
+    return currentSimilar && currentSimilar !== [] ? (
       <div className="favorite_panel__inner">
         <div className="similar_base__container">
           <div className="similar_container">
@@ -92,7 +92,7 @@ class SimilarOfTrack extends React.Component {
               })}
               className="full_width clickable"
             />
-            <div className="track_artist">
+            <div className="track_name">
               {similar.name}
             </div>
             <div className="track_artist">
