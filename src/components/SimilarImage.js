@@ -62,6 +62,9 @@ class SimilarImage extends React.Component {
 
     return currentSimilar && currentSimilar[0] ? (
       <div className="favorite_panel__inner">
+        <div className="panel_title">
+          Similar Tracks
+        </div>
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
             <img

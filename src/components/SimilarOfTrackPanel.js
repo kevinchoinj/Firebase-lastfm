@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import * as userActions from '../actions/users';
 import * as lastfmActions from '../actions/lastfm';
+import * as pagesActions from '../actions/pages';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
 
@@ -19,6 +20,9 @@ class SimilarOfTrackPanel extends React.Component {
     this.props.lastfmActions.setSimilarOfTrack(values);
     this.props.lastfmActions.requestSimilarOfTrack(values);
   }
+  toggleSimilarOfTrack = () => {
+    this.props.pagesActions.toggleSimilarOfTrack(false);
+  }
   render() {
 
     const {
@@ -34,7 +38,9 @@ class SimilarOfTrackPanel extends React.Component {
 
     return(
       <div className={panelName}>
-        <CloseButton />
+        <CloseButton
+          toggleAction= {this.toggleSimilarOfTrack}
+        />
         <SimilarOfTrack/>
       </div>
     );
@@ -48,5 +54,6 @@ export default connect(
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),
     lastfmActions: bindActionCreators(lastfmActions, dispatch),
+    pagesActions: bindActionCreators(pagesActions, dispatch),
   }),
 )(SimilarOfTrackPanel);

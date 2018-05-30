@@ -31,7 +31,7 @@ class Home extends React.Component {
                 onSubmit={this.onSubmit}
               />
             </div>
-            <div>
+            <div className="lastfm_username">
               {lastfmUsername}
             </div>
             <TrackImage/>

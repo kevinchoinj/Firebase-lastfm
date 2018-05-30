@@ -49,7 +49,7 @@
   transition: .25s ease-out;
 }
 .favorite_panel__inner {
-  padding-top: 50px;
+  padding-top: 75px;
 }
 .favorite_panel--display {
   right: 0px;
@@ -79,7 +79,26 @@
   line-height: 20px;
   vertical-align: middle;
 }
-
+.form_field {
+  width: 100%;
+  padding: 7px 0px 7px 7px;
+}
+.form_button {
+  height: 100%;
+  width: 100%;
+}
+.panel_title {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 0px 25px 25px 25px;
+}
+.lastfm_username {
+  font-size: 12px;
+  font-weight: 600;
+}
+.form_container {
+  display: flex;
+}
 .close_container {
   position: absolute;
   left: 18px;
@@ -186,5 +205,16 @@
 @media screen and (max-width: 992px) {
   .similar_container {
     width: calc(25% - 50px);
+  }
+  .side_right {
+    width: 100%;
+    position: relative;
+  }
+  .side_left {
+    position: relative;
+    width: 100%;
+  }
+  .current_container {
+    width: 50%;
   }
 }

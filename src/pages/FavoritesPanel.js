@@ -6,11 +6,16 @@ import * as pagesActions from '../actions/pages';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
 import filled from '../media/filled.png';
+import CloseButton from '../components/CloseButton';
+import {history} from '../store';
 
 const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack}) => {
   if (favorites){
     return(
       <div className="favorite_panel__inner">
+        <div className="panel_title">
+          Favorites
+        </div>
         {Object.entries(favorites).map((favorite, key)=>
           <div key={key} className="similar_container">
             <img
@@ -60,6 +65,9 @@ class FavoritesPanel extends React.Component {
     this.props.lastfmActions.requestSimilarOfTrack(values);
     this.props.pagesActions.toggleSimilarOfTrack(true);
   }
+  returnHome = () => {
+    history.push("/");
+  }
   render() {
 
     const {
@@ -77,6 +85,9 @@ class FavoritesPanel extends React.Component {
 
     return loggedIn ? (
       <div className={panelName}>
+        <CloseButton
+          toggleAction= {this.returnHome}
+        />
         <FavoritesDisplay
           favorites={favorites}
           removeFavoriteTrack = {this.removeFavoriteTrack}

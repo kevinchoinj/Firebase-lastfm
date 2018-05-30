@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import {Button} from 'react-bootstrap';
+import FontAwesome from 'react-fontawesome';
 
 const renderField = ({
   input,
@@ -12,7 +13,7 @@ const renderField = ({
     <input {...input}
       placeholder={placeholder}
       type={type}
-      className="user_form_field"
+      className="form_field"
     />
     {touched &&
       ((error && <span className="form_error">{error}</span>) ||
@@ -23,27 +24,26 @@ const renderField = ({
 const LastfmUsernameForm = props => {
   const { handleSubmit, submitting, error } = props;
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="spacing_bottom__large">
-        <div className="form_label spacing_bottom">
-          Lastfm Username
-        </div>
+    <form onSubmit={handleSubmit} className="spacing_left">
+      <div className="form_label spacing_bottom">
+        Lastfm Username
+      </div>
+      <div className="form_container">
         <Field
           name="username"
-          placeholder="shodyra"
+          placeholder=""
           type="text"
           component={renderField}
         />
-      </div>
-      {error && <strong>{error}</strong>}
-      <div className="user_row">
+      <div>
         <Button
           type="submit"
           disabled = {submitting}
-          className="user_button user_button_color"
+          className="form_button"
         >
-          Submit
+          <FontAwesome name="play"/>
         </Button>
+      </div>
       </div>
     </form>
   );

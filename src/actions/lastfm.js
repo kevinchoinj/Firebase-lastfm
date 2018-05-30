@@ -44,17 +44,19 @@ const  requestTrackThenRequestSimilar = (values) => (dispatch, getState) => {
 	ourRequest.onload = function(){
 		if (ourRequest.status >= 200 && ourRequest.status < 400){
       let parsed = JSON.parse(ourRequest.responseText);
-      if (getState().lastfm.currentTrack){
-        if (
-          (getState().lastfm.currentTrack.name !== parsed.recenttracks.track["0"].name)
-          &&
-          (getState().lastfm.currentTrack.artist["#text"] !== parsed.recenttracks.track["0"].artist["#text"])
-        ){
+      if (parsed.recenttracks){
+        if (getState().lastfm.currentTrack && parsed.recenttracks.track){
+          if (
+            (getState().lastfm.currentTrack.name !== parsed.recenttracks.track["0"].name)
+            &&
+            (getState().lastfm.currentTrack.artist["#text"] !== parsed.recenttracks.track["0"].artist["#text"])
+          ){
+            dispatch(requestSimilar(parsed));
+          }
+        }
+        else {
           dispatch(requestSimilar(parsed));
         }
-      }
-      else {
-        dispatch(requestSimilar(parsed));
       }
 		}
 		else{
