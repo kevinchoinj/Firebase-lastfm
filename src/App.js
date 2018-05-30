@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 
 import Home from './pages/Home';
+
+import Artist from './pages/Artist';
+import Track from './pages/Track';
+
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
 import LoginPanel from './pages/LoginPanel';
@@ -11,6 +15,8 @@ import Admin from './pages/Admin';
 import DefaultPage from './pages/DefaultPage';
 import Favorites from './pages/Favorites';
 import FavoritesPanel from './pages/FavoritesPanel';
+import Similar from './pages/Similar';
+import SimilarPanel from './pages/SimilarPanel';
 import SimilarOfTrackPanel from './components/SimilarOfTrackPanel';
 
 import MenuWrap from './menu/MenuWrap';
@@ -31,6 +37,13 @@ class App extends Component {
         <Route exact path={"/favorites"} children={({ match }) => (
 		      <div>
 		        <FavoritesPanel
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
+        <Route exact path={"/similar"} children={({ match }) => (
+		      <div>
+		        <SimilarPanel
               isActive={Boolean(match) ? true : false}
 		        />
 		      </div>
@@ -56,6 +69,10 @@ class App extends Component {
             render={(props) => <HomePage {...props}/>}
           />
           <Route
+            exact path="/similar"
+            render={(props) => <Similar {...props}/>}
+          />
+          <Route
             exact path="/register"
             render={(props) => <Register {...props}/>}
           />
@@ -74,6 +91,14 @@ class App extends Component {
           <Route
             path="/test/:id"
             render={(props) => <DefaultPage {...props}/>}
+          />
+          <Route
+            path="/track/:artist/:track"
+            render={(props) => <Track {...props}/>}
+          />
+          <Route
+            path="/artist/:artist"
+            render={(props) => <Artist {...props}/>}
           />
         </Switch>
       </div>

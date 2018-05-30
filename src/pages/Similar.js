@@ -3,9 +3,9 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as pagesActions from '../actions/pages';
 
-class Register extends React.Component {
+class Similar extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmRegister');
+    this.props.pagesActions.setPageName('lastfmSimilar');
   }
   render() {
     return null;
@@ -18,4 +18,4 @@ export default connect(
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),
   }),
-)(Register);
+)(Similar);

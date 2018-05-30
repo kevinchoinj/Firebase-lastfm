@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import * as authActions from '../actions/authentication';
 import * as pagesActions from '../actions/pages';
 
-const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName}) => {
+const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName, loginName, registerName}) => {
   if (loggedIn){
     return(
       <div>
@@ -32,7 +32,7 @@ const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName}) 
     <div>
       <div>
         <Link
-          className="home_nav__link"
+          className={registerName}
           to="/register"
           onClick={()=>toggleSimilarOfTrack()}
         >
@@ -41,7 +41,7 @@ const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName}) 
       </div>
       <div>
         <Link
-          className="home_nav__link"
+          className={loginName}
           to="/login"
           onClick={()=>toggleSimilarOfTrack()}
         >
@@ -74,14 +74,30 @@ class HomeNav extends React.Component{
         'home_nav__link--selected': pageName === "lastfmHome",
       }
     );
-
+    const similarName= classNames(
+      'home_nav__link',
+      {
+        'home_nav__link--selected': pageName === "lastfmSimilar",
+      }
+    );
     const favoritesName= classNames(
       'home_nav__link',
       {
         'home_nav__link--selected': pageName === "lastfmFavorites",
       }
     );
-
+    const loginName= classNames(
+      'home_nav__link',
+      {
+        'home_nav__link--selected': pageName === "lastfmLogin",
+      }
+    );
+    const registerName= classNames(
+      'home_nav__link',
+      {
+        'home_nav__link--selected': pageName === "lastfmRegister",
+      }
+    );
 
 
     return(
@@ -93,8 +109,18 @@ class HomeNav extends React.Component{
         >
           Home
         </Link>
+        <br/>
+        <Link
+          className={similarName}
+          to="/similar"
+          onClick = {this.toggleSimilarOfTrack}
+        >
+          Similar
+        </Link>
         <LoginDisplay
           favoritesName={favoritesName}
+          loginName={loginName}
+          registerName={registerName}
           loggedIn={loggedIn}
           signOut={this.signOut}
           toggleSimilarOfTrack={this.toggleSimilarOfTrack}

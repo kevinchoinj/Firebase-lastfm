@@ -6,6 +6,7 @@ import * as userActions from '../actions/users';
 import {bindActionCreators} from 'redux';
 import * as pagesActions from '../actions/pages';
 import lastfmImage from '../media/lastfm.png';
+import {Link} from 'react-router-dom';
 
 const UserOptionsDisplay = ({
   loggedIn,
@@ -82,10 +83,14 @@ class TrackImage extends React.Component {
         />
         }
         <div className="track_name">
-        {currentTrack.name}
+          <Link to={"/track/"+currentTrack.artist["#text"]+"/"+currentTrack.name}>
+            {currentTrack.name}
+          </Link>
         </div>
         <div className="track_artist">
-        {currentTrack.artist["#text"]}
+          <Link to={"/artist/"+currentTrack.artist["#text"]}>
+            {currentTrack.artist["#text"]}
+          </Link>
         </div>
         <UserOptionsDisplay
           currentTrack={currentTrack}

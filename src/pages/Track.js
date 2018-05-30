@@ -5,10 +5,17 @@ import * as pagesActions from '../actions/pages';
 
 class Register extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmRegister');
+    this.props.pagesActions.setPageName('lastfmArtist');
   }
   render() {
-    return null;
+    return (
+      <div className="side_right">
+      track
+        {this.props.match.params.artist}
+        <br/>
+        {this.props.match.params.track}
+      </div>
+    )
   }
 }
 

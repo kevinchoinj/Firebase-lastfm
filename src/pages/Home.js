@@ -22,24 +22,19 @@ class Home extends React.Component {
     } = this.props;
 
     return (
-      <div>
-        <div className="side_left">
-          <div className="side_left__inner">
-            <div className="home_header">
-              <HomeNav/>
-              <LastfmUsernameForm
-                onSubmit={this.onSubmit}
-              />
-            </div>
-            <div className="lastfm_username">
-              {lastfmUsername}
-            </div>
-            <TrackImage/>
-            <RecentTracks/>
+      <div className="side_left">
+        <div className="side_left__inner">
+          <div className="home_header">
+            <HomeNav/>
+            <LastfmUsernameForm
+              onSubmit={this.onSubmit}
+            />
           </div>
-        </div>
-        <div className="side_right">
-          <SimilarImage/>
+          <div className="lastfm_username">
+            {lastfmUsername}
+          </div>
+          <TrackImage/>
+          <RecentTracks/>
         </div>
       </div>
     );
