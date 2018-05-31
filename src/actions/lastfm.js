@@ -7,11 +7,53 @@ export const SET_LASTFM_USERNAME = 'SET_LASTFM_USERNAME';
 export const CLEAR_SIMILAR_OF_TRACK = 'CLEAR_SIMILAR_OF_TRACK';
 export const RECEIVE_SIMILAR_OF_TRACK = 'RECEIVE_SIMILAR_OF_TRACK';
 export const SET_SIMILAR_OF_TRACK = 'SET_SIMILAR_OF_TRACK';
+export const RECEIVE_TRACK_INFO = 'RECEIVE_TRACK_INFO';
+export const RECEIVE_ARTIST_INFO = 'RECEIVE_ARTIST_INFO';
 
 export const getCurrentTrack = (values) => (dispatch, getState) =>
   dispatch(requestTrack(values))
 export const getCurrentSimilar = (values) => (dispatch, getState) =>
   dispatch(requestTrackThenRequestSimilar(values))
+export const getTrackInfo = (values) => (dispatch, getState) =>
+  dispatch(requestTrackInfo(values))
+export const getArtistInfo = (values) => (dispatch, getState) =>
+  dispatch(requestArtistInfo(values))
+
+const  requestTrackInfo = (values) => (dispatch, getState) => {
+  let ourRequest = new XMLHttpRequest();
+  ourRequest.open('Get', "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key="+apiKey+"&artist="+values.artist+"&track="+values.track+"&format=json")
+  ourRequest.onload = function(){
+    if (ourRequest.status >= 200 && ourRequest.status < 400){
+      let parsed = JSON.parse(ourRequest.responseText);
+      dispatch(receiveTrackInfo(parsed.track));
+    }
+    else{
+      console.log("connected to server, but returned error.");
+    }
+  };
+  ourRequest.onerror = function(){
+    console.log("Connection error");
+  }
+  return ourRequest.send();
+}
+const  requestArtistInfo = (values) => (dispatch, getState) => {
+  let ourRequest = new XMLHttpRequest();
+  ourRequest.open('Get', "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist="+values.artist+"&api_key="+apiKey+"&format=json")
+  ourRequest.onload = function(){
+    if (ourRequest.status >= 200 && ourRequest.status < 400){
+      let parsed = JSON.parse(ourRequest.responseText);
+      dispatch(receiveArtistInfo(parsed.artist));
+    }
+    else{
+      console.log("connected to server, but returned error.");
+    }
+  };
+  ourRequest.onerror = function(){
+    console.log("Connection error");
+  }
+  return ourRequest.send();
+}
+
 
 const  requestTrack = (values) => (dispatch, getState) => {
   let ourRequest = new XMLHttpRequest();
@@ -131,6 +173,19 @@ export const requestSimilarOfTrack = (values) => (dispatch, getState) => {
     console.log("Connection error");
 	}
 	return ourRequest.send();
+}
+
+export function receiveTrackInfo(data) {
+  return {
+    type: RECEIVE_TRACK_INFO,
+    payload: data
+  }
+}
+export function receiveArtistInfo(data) {
+  return {
+    type: RECEIVE_ARTIST_INFO,
+    payload: data
+  }
 }
 
 export function setSimilarOfTrack(data){
