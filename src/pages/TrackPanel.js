@@ -8,6 +8,7 @@ import lastfmImage from '../media/lastfm.png';
 import {Link} from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import {history} from '../store';
+import classNames from 'classnames';
 
 const AlbumTextDisplay = ({album, track}) => {
   if (track.artist){
@@ -103,10 +104,18 @@ class Track extends React.Component {
   render() {
     const {
       trackInfo,
+      isActive,
     } = this.props;
 
+    const panelName = classNames(
+      'favorite_panel',
+      {
+        'favorite_panel--display': isActive
+      }
+    );
+
     return trackInfo ? (
-      <div className="side_right">
+      <div className={panelName}>
         <WatermarkDisplay
           trackInfo = {trackInfo}
         />

@@ -73,14 +73,20 @@ class App extends Component {
 		        />
 		      </div>
 		    )}/>
-        <Route
-            path="/artist/:artist"
-            render={(props) => <ArtistPanel {...props}/>}
-          />
-          <Route
-            path="/track/:artist/:track"
-            render={(props) => <TrackPanel {...props}/>}
-          />
+        <Route exact path={"/artist/:artist"} children={({ match }) => (
+		      <div>
+		        <ArtistPanel
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
+        <Route exact path={"/track/:artist/:track"} children={({ match }) => (
+		      <div>
+		        <TrackPanel
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
         <Switch>
           <Route
             exact path="/"

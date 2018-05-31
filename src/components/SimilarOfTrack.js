@@ -40,32 +40,6 @@ const UserOptionsDisplay = ({
   }
 };
 
-const WatermarkDisplay = ({
-  trackInfo
-  }) => {
-  if (trackInfo){
-    if (trackInfo.album){
-      if (trackInfo.album.image){
-        return (
-          <div
-            className="watermark_background"
-            style={{backgroundImage:"url("+trackInfo.album.image[3]["#text"]+")"}}
-          />
-        )
-      }
-      else {
-        return null;
-      }
-    }
-    else {
-      return null;
-    }
-  }
-  else {
-    return null;
-  }
-};
-
 class SimilarOfTrack extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
     this.props.userActions.addFavoriteTrack(artist, track, image);
@@ -91,16 +65,22 @@ class SimilarOfTrack extends React.Component {
     return currentSimilar && currentSimilar !== [] ? (
 
       <div className="favorite_panel__inner">
-        <WatermarkDisplay
-          trackInfo = {trackInfo}
-        />
-
-        <div className="similar_container">
-          <div className="track_name">
-            {trackInfo.name}
+        <div className="info_container">
+          <div>
+            <Link
+              to={"/track/"+trackInfo.artist.name+"/"+trackInfo.name}
+              className="track_name"
+            >
+              {trackInfo.name}
+            </Link>
           </div>
-          <div className="track_artist">
-            {trackInfo.artist.name}
+          <div>
+            <Link
+              to={"/artist/"+trackInfo.artist.name}
+              className="track_artist"
+            >
+              {trackInfo.artist.name}
+            </Link>
           </div>
         </div>
 

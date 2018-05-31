@@ -6,6 +6,7 @@ import * as lastfmActions from '../actions/lastfm';
 import {history} from '../store';
 import CloseButton from '../components/CloseButton';
 import FontAwesome from 'react-fontawesome';
+import classNames from 'classnames';
 
 const BioDisplay = ({bio}) => {
   if (bio){
@@ -131,11 +132,18 @@ class Register extends React.Component {
   render() {
     const {
       artistInfo,
+      isActive,
     } = this.props;
 
+    const panelName = classNames(
+      'favorite_panel',
+      {
+        'favorite_panel--display': isActive
+      }
+    );
 
     return artistInfo ?(
-      <div className="side_right">
+      <div className={panelName}>
         <WatermarkDisplay
           artistInfo={artistInfo}
         />
