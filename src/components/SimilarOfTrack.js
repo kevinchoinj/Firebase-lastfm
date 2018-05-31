@@ -40,6 +40,32 @@ const UserOptionsDisplay = ({
   }
 };
 
+const WatermarkDisplay = ({
+  trackInfo
+  }) => {
+  if (trackInfo){
+    if (trackInfo.album){
+      if (trackInfo.album.image){
+        return (
+          <div
+            className="watermark_background"
+            style={{backgroundImage:"url("+trackInfo.album.image[3]["#text"]+")"}}
+          />
+        )
+      }
+      else {
+        return null;
+      }
+    }
+    else {
+      return null;
+    }
+  }
+  else {
+    return null;
+  }
+};
+
 class SimilarOfTrack extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
     this.props.userActions.addFavoriteTrack(artist, track, image);
@@ -65,26 +91,18 @@ class SimilarOfTrack extends React.Component {
     return currentSimilar && currentSimilar !== [] ? (
 
       <div className="favorite_panel__inner">
-      {trackInfo ?
-        <div className="similar_base__container">
-          {trackInfo.album?
-          <div className="similar_container">
-            <img
-              src={trackInfo.album.image[3]["#text"]}
-              alt="similar"
-              className="full_width"
-            />
-          </div>:null}
+        <WatermarkDisplay
+          trackInfo = {trackInfo}
+        />
 
-          <div className="similar_container">
-            <div className="track_name">
-              {trackInfo.name}
-            </div>
-            <div className="track_artist">
-              {trackInfo.artist.name}
-            </div>
+        <div className="similar_container">
+          <div className="track_name">
+            {trackInfo.name}
           </div>
-      </div>:null}
+          <div className="track_artist">
+            {trackInfo.artist.name}
+          </div>
+        </div>
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">

@@ -115,6 +115,9 @@ const WatermarkDisplay = ({
         />
       )
     }
+    else {
+      return null;
+    }
   }
   else {
     return null;
