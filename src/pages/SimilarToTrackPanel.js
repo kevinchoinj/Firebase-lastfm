@@ -10,6 +10,26 @@ import {history} from '../store';
 import SimilarOfTrack from '../components/SimilarOfTrack';
 import FontAwesome from 'react-fontawesome';
 
+const WatermarkDisplay = ({
+  trackInfo
+  }) => {
+  if (trackInfo){
+    if (trackInfo.album){
+      if (trackInfo.album.image){
+        return (
+          <div
+            className="watermark_background"
+            style={{backgroundImage:"url("+trackInfo.album.image[3]["#text"]+")"}}
+          />
+        )
+      }
+    }
+  }
+  else {
+    return null;
+  }
+};
+
 class FavoritesPanel extends React.Component {
   returnHome = () => {
     history.push("/");
@@ -18,6 +38,7 @@ class FavoritesPanel extends React.Component {
     const {
       loggedIn,
       isActive,
+      trackInfo,
     } = this.props;
 
     const panelName = classNames(
@@ -27,8 +48,12 @@ class FavoritesPanel extends React.Component {
       }
     );
 
+
     return loggedIn ? (
       <div className={panelName}>
+       <WatermarkDisplay
+          trackInfo = {trackInfo}
+        />
         <CloseButton
           toggleAction= {this.returnHome}
         />
@@ -48,6 +73,7 @@ class FavoritesPanel extends React.Component {
 export default connect(
   (state, ownProps) => ({
     loggedIn: state.authentication.loggedIn,
+    trackInfo: state.lastfm.trackInfo,
   }),
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),

@@ -58,31 +58,33 @@ class SimilarOfTrack extends React.Component {
       loggedIn,
       favorites,
       similarBase,
+      trackInfo,
     } = this.props;
 
 
     return currentSimilar && currentSimilar !== [] ? (
-      <div className="favorite_panel__inner">
 
+      <div className="favorite_panel__inner">
+      {trackInfo ?
         <div className="similar_base__container">
-        {/*
+          {trackInfo.album?
           <div className="similar_container">
             <img
-              src={similarBase.image}
+              src={trackInfo.album.image[3]["#text"]}
               alt="similar"
               className="full_width"
             />
-          </div>
-        */}
+          </div>:null}
+
           <div className="similar_container">
             <div className="track_name">
-              {similarBase.track}
+              {trackInfo.name}
             </div>
             <div className="track_artist">
-              {similarBase.artist}
+              {trackInfo.artist.name}
             </div>
           </div>
-      </div>
+      </div>:null}
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
@@ -140,6 +142,7 @@ export default connect(
     favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
     similarBase: state.lastfm.similarOfBase,
+    trackInfo: state.lastfm.trackInfo,
   }),
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),

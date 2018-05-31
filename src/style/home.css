@@ -275,6 +275,19 @@
 .back_button:hover {
   color: #aaa;
 }
+.watermark_background {
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  z-index: -1;
+  opacity: .1;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -o-transition: .2s linear;
+  transition: .2s linear;
+}
 @media screen and (max-width: 992px) {
   .similar_container {
     width: calc(25% - 50px);

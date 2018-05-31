@@ -7,7 +7,7 @@ import * as lastfmActions from '../actions/lastfm';
 class Similar extends React.Component {
   componentDidMount(){
     this.props.pagesActions.setPageName('lastfmSimilarMisc');
-    this.props.lastfmActions.setSimilarOfTrack({
+    this.props.lastfmActions.getTrackInfo({
       track:this.props.match.params.track,
       artist:this.props.match.params.artist,
     });
@@ -17,7 +17,7 @@ class Similar extends React.Component {
     });
   }
   componentDidUpdate(){
-    this.props.lastfmActions.setSimilarOfTrack({
+    this.props.lastfmActions.getTrackInfo({
       track:this.props.match.params.track,
       artist:this.props.match.params.artist,
     });

@@ -72,7 +72,7 @@ class RecentTracks extends React.Component {
 
     return recentTracks ? (
       <div className="recent_tracks__container">
-      <div className="track_name spacing_bottom">
+      <div className="track_text spacing_bottom">
         Recent Tracks
       </div>
       {recentTracks.map((track, key) =>

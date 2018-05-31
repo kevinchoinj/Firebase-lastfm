@@ -5,6 +5,8 @@ import Home from './pages/Home';
 
 import Artist from './pages/Artist';
 import Track from './pages/Track';
+import ArtistPanel from './pages/ArtistPanel';
+import TrackPanel from './pages/TrackPanel';
 
 import HomePage from './pages/HomePage';
 import Login from './pages/Login';
@@ -71,6 +73,14 @@ class App extends Component {
 		        />
 		      </div>
 		    )}/>
+        <Route
+            path="/artist/:artist"
+            render={(props) => <ArtistPanel {...props}/>}
+          />
+          <Route
+            path="/track/:artist/:track"
+            render={(props) => <TrackPanel {...props}/>}
+          />
         <Switch>
           <Route
             exact path="/"
