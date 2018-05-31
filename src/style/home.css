@@ -177,12 +177,52 @@
  font-weight: 600;
  line-height: 20px;
  vertical-align: middle;
+ color: #ddd;
+ text-decoration: none;
+ -webkit-transition: .2s ease-out;
+ -moz-transition: .2s ease-out;
+ -o-transition: .2s ease-out;
+ transition: .2s ease-out;
 }
 .track_artist {
   font-size: 12px;
   line-height: 20px;
   vertical-align: middle;
+  color: #ddd;
+  text-decoration: none;
+  -webkit-transition: .2s ease-out;
+  -moz-transition: .2s ease-out;
+  -o-transition: .2s ease-out;
+  transition: .2s ease-out;
 }
+.track_image__container {
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  position:relative;
+}
+.track_image {
+  width: 100%;
+  padding-top: 100%;
+  cursor: pointer;
+  position:absolute;
+  top: 0px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -o-transition: .2s linear;
+  transition: .2s linear;
+  transform: scale(1,1);
+}
+.track_image:hover {
+  transform: scale(1.1, 1.1);
+}
+.track_name:hover,
+.track_artist:hover {
+  color: #aaa;
+}
+
 
 .form_label {
   font-weight: 600;

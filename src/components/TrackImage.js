@@ -82,13 +82,19 @@ class TrackImage extends React.Component {
           onClick = {this.toggleSimilarOfTrack}
         />
         }
-        <div className="track_name">
-          <Link to={"/track/"+currentTrack.artist["#text"]+"/"+currentTrack.name}>
+        <div>
+          <Link
+            to={"/track/"+currentTrack.artist["#text"]+"/"+currentTrack.name}
+            className="track_name"
+          >
             {currentTrack.name}
           </Link>
         </div>
-        <div className="track_artist">
-          <Link to={"/artist/"+currentTrack.artist["#text"]}>
+        <div>
+          <Link
+            to={"/artist/"+currentTrack.artist["#text"]}
+            className="track_artist"
+          >
             {currentTrack.artist["#text"]}
           </Link>
         </div>

@@ -5,6 +5,7 @@ import * as lastfmActions from '../actions/lastfm';
 import {bindActionCreators} from 'redux';
 import filled from '../media/filled.png';
 import unfilled from '../media/unfilled.png';
+import {Link} from 'react-router-dom';
 
 const UserOptionsDisplay = ({
   loggedIn,
@@ -82,21 +83,32 @@ class SimilarOfTrack extends React.Component {
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
-            <img
-              src={similar.image[2]["#text"]}
-              alt="similar"
-              onClick={()=>this.requestSimilarOfTrack({
-                artist: similar.artist.name,
-                track: similar.name,
-                image: similar.image[2]["#text"],
-              })}
-              className="full_width clickable"
-            />
-            <div className="track_name">
-              {similar.name}
+            <div className="track_image__container">
+              <div
+                className="track_image"
+                style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
+                onClick={()=>this.requestSimilarOfTrack({
+                  artist: similar.artist.name,
+                  track: similar.name,
+                  image: similar.image[2]["#text"],
+                })}
+              />
             </div>
-            <div className="track_artist">
-              {similar.artist.name}
+            <div>
+              <Link
+                to={"/track/"+similar.artist.name+"/"+similar.name}
+                className="track_name"
+              >
+                {similar.name}
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={"/artist/"+similar.artist.name}
+                className="track_artist"
+              >
+                {similar.artist.name}
+              </Link>
             </div>
             <UserOptionsDisplay
               loggedIn={loggedIn}

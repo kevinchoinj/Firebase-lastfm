@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import filled from '../media/filled.png';
 import CloseButton from '../components/CloseButton';
 import {history} from '../store';
+import {Link} from 'react-router-dom';
 
 const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack}) => {
   if (favorites){
@@ -18,21 +19,32 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack
         </div>
         {Object.entries(favorites).map((favorite, key)=>
           <div key={key} className="similar_container">
-            <img
-              src={favorite[1].image}
-              alt="favorite"
-              onClick={()=>requestSimilarOfTrack({
-                artist: favorite[1].artist,
-                track: favorite[1].track,
-                image: favorite[1].image,
-              })}
-              className="full_width clickable"
-            />
-            <div className="track_name">
-              {favorite[1].track}
+            <div className="track_image__container">
+              <div
+                className="track_image"
+                style={{backgroundImage: "url("+favorite[1].image+")"}}
+                onClick={()=>requestSimilarOfTrack({
+                  artist: favorite[1].artist,
+                  track: favorite[1].track,
+                  image: favorite[1].image,
+                })}
+              />
             </div>
-            <div className="track_artist">
-              {favorite[1].artist}
+            <div>
+              <Link
+                to={"/track/"+favorite[1].artist+"/"+favorite[1].track}
+                className="track_name"
+              >
+                {favorite[1].track}
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={"/artist/"+favorite[1].artist}
+                className="track_artist"
+              >
+                {favorite[1].artist}
+              </Link>
             </div>
             <div>
               <img
