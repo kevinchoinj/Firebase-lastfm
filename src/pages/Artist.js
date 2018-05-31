@@ -3,13 +3,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as pagesActions from '../actions/pages';
 import * as lastfmActions from '../actions/lastfm';
+import {history} from '../store';
+import CloseButton from '../components/CloseButton';
+import FontAwesome from 'react-fontawesome';
 
 const BioDisplay = ({bio}) => {
   if (bio){
     return(
       <div>
-        Biography
-        <br/>
         {bio.content}
       </div>
     )
@@ -23,9 +24,10 @@ const ImageDisplay = ({images}) => {
   if (images){
     return(
       <div>
-        Image
-        <br/>
-        <img src={images[3]["#text"]}/>
+        <img
+          src={images[3]["#text"]}
+          alt="artist"
+        />
         {/*images.map((image, key)=>
           <div key={key}>
             <img
@@ -71,8 +73,6 @@ const StatsDisplay = ({stats}) => {
   if (stats){
     return(
       <div>
-        Stats
-        <br/>
         Listeners: {stats.listeners}
         <br/>
         Playcount: {stats.playcount}
@@ -109,6 +109,9 @@ class Register extends React.Component {
     this.props.pagesActions.setPageName('lastfmArtist');
     this.props.lastfmActions.getArtistInfo({artist:this.props.match.params.artist});
   }
+  returnHome = () => {
+    history.push("/");
+  }
   render() {
     const {
       artistInfo,
@@ -116,23 +119,35 @@ class Register extends React.Component {
 
     return artistInfo ?(
       <div className="side_right">
-      artist
-        {artistInfo.name}
-        <ImageDisplay
-          images={artistInfo.image}
+        <CloseButton
+          toggleAction= {this.returnHome}
         />
-        <StatsDisplay
-          stats={artistInfo.stats}
-        />
-        <TagsDisplay
-          tags={artistInfo.tags}
-        />
-        <BioDisplay
-          bio={artistInfo.bio}
-        />
-        <SimilarDisplay
-          similar={artistInfo.similar}
-        />
+        <div
+          className="back_button"
+          onClick={()=>history.goBack()}
+        >
+          <FontAwesome name="arrow-circle-left"/>
+        </div>
+        <div className="side_right__inner">
+          <div className="info_container">
+            {artistInfo.name}
+            <ImageDisplay
+              images={artistInfo.image}
+            />
+            <StatsDisplay
+              stats={artistInfo.stats}
+            />
+            <TagsDisplay
+              tags={artistInfo.tags}
+            />
+            <BioDisplay
+              bio={artistInfo.bio}
+            />
+            <SimilarDisplay
+              similar={artistInfo.similar}
+            />
+          </div>
+        </div>
       </div>
     ):null
   }

@@ -4,6 +4,9 @@
   margin: 5px 25px 10px 25px;
   vertical-align: top;
 }
+.info_container {
+  padding: 0px 25px 25px 25px;
+}
 .current_container {
   margin: 0 auto;
   margin-top: 25px;
@@ -21,6 +24,7 @@
   padding: 25px;
 }
 .side_right {
+  z-index: 0;
   width: 75%;
   height: 100%;
   background-color: #444;
@@ -31,7 +35,7 @@
   overflow: auto;
 }
 .side_right__inner {
-  padding-top: 50px;
+  padding-top: 75px;
 }
 
 .favorite_panel {
@@ -88,13 +92,15 @@
   width: 100%;
 }
 .panel_title {
-  font-size: 12px;
+  font-size: 30px;
+  color: #eee;
   font-weight: 600;
   margin: 0px 25px 25px 25px;
 }
 .lastfm_username {
-  font-size: 12px;
+  font-size: 30px;
   font-weight: 600;
+  color: #eee;
 }
 .form_container {
   display: flex;
@@ -107,6 +113,7 @@
   height:30px;
   width: 30px;
 }
+
 .close_line1 {
   background-color: #fff;
   height: 3px;
@@ -183,6 +190,7 @@
  -moz-transition: .2s ease-out;
  -o-transition: .2s ease-out;
  transition: .2s ease-out;
+ cursor: pointer;
 }
 .track_artist {
   font-size: 12px;
@@ -194,6 +202,13 @@
   -moz-transition: .2s ease-out;
   -o-transition: .2s ease-out;
   transition: .2s ease-out;
+  cursor: pointer;
+}
+.track_text {
+  font-size: 12px;
+  line-height: 20px;
+  vertical-align: middle;
+  color: #ddd;
 }
 .track_image__container {
   width: 100%;
@@ -241,7 +256,25 @@
   display: flex;
   justify-content: space-between;
 }
-
+.back_button {
+  position: absolute;
+  top: 21px;
+  left: 60px;
+  font-size: 25px;
+  cursor: pointer;
+  color: #fff;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -o-transition: .2s linear;
+  transition: .2s linear;
+}
+.close_container:hover .close_line1,
+.close_container:hover .close_line2 {
+  background-color: #aaa;
+}
+.back_button:hover {
+  color: #aaa;
+}
 @media screen and (max-width: 992px) {
   .similar_container {
     width: calc(25% - 50px);

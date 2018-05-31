@@ -1,21 +1,58 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
+import CloseButton from '../components/CloseButton';
 import * as pagesActions from '../actions/pages';
 import * as lastfmActions from '../actions/lastfm';
 import lastfmImage from '../media/lastfm.png';
+import {Link} from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
+import {history} from '../store';
 
-const AlbumDisplay = ({album}) => {
+const AlbumTextDisplay = ({album, track}) => {
+  if (track.artist){
+    return(
+      <div className="similar_container">
+        <div>
+          <Link
+            to={"/track/"+track.artist.name+"/"+track.name}
+            className="track_name"
+          >
+            {track.name}
+          </Link>
+        </div>
+        <div>
+          <Link
+            to={"/artist/"+track.artist.name}
+            className="track_artist"
+          >
+            {track.artist.name}
+          </Link>
+        </div>
+        <div className="track_text">
+          {album.title}
+        </div>
+      </div>
+    )
+  }
+  else {
+    return null;
+  }
+};
+const AlbumDisplay = ({album, track}) => {
   if (album){
     return(
-      <div>
-        Album
-        <br/>
-        {album.title}
-        <br/>
-        {album.artist}
-        <ImageDisplay
-          image={album.image}
+      <div className="similar_base__container">
+        <div className="similar_container">
+          <img
+            src={album.image[3]["#text"]}
+            alt="similar"
+            className="full_width"
+          />
+        </div>
+        <AlbumTextDisplay
+          album={album}
+          track={track}
         />
       </div>
     )
@@ -33,31 +70,13 @@ const AlbumDisplay = ({album}) => {
   }
 };
 
-const ImageDisplay = ({image}) => {
-  if (image){
-    return(
-      <div>
-        Image
-        <br/>
-        {image[3]["#text"]}
-      </div>
-    )
-  }
-  else {
-    return (
-    <div>
-      <img
-        src={lastfmImage}
-        alt="lastfm"
-      />
-    </div>);
-  }
-};
-
-class Register extends React.Component {
+class Track extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmArtist');
+    this.props.pagesActions.setPageName('lastfmTrack');
     this.props.lastfmActions.getTrackInfo({track:this.props.match.params.track, artist:this.props.match.params.artist});
+  }
+  returnHome = () => {
+    history.push("/");
   }
   render() {
     const {
@@ -66,17 +85,25 @@ class Register extends React.Component {
 
     return trackInfo ? (
       <div className="side_right">
-        <div className="favorite_panel__inner">
-        track
-          {this.props.match.params.artist}
-          <br/>
-          {this.props.match.params.track}
-          <AlbumDisplay
-            album={trackInfo.album}
-          />
+        <CloseButton
+          toggleAction= {this.returnHome}
+        />
+        <div
+          className="back_button"
+          onClick={()=>history.goBack()}
+        >
+          <FontAwesome name="arrow-circle-left"/>
+        </div>
+      <div className="side_right__inner">
+        <AlbumDisplay
+          album={trackInfo.album}
+          track={trackInfo}
+        />
+        <div className="info_container">
           listeners: {trackInfo.listeners}
           <br/>
           playcount: {trackInfo.playcount}
+        </div>
         </div>
       </div>
     ):null
@@ -91,4 +118,4 @@ export default connect(
     pagesActions: bindActionCreators(pagesActions, dispatch),
     lastfmActions: bindActionCreators(lastfmActions, dispatch),
   }),
-)(Register);
+)(Track);

@@ -69,15 +69,14 @@ class SimilarImage extends React.Component {
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
             <div className="track_image__container">
-              <div
-                className="track_image"
-                style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
-                onClick={()=>this.requestSimilarOfTrack({
-                  artist: similar.artist.name,
-                  track: similar.name,
-                  image: similar.image[2]["#text"],
-                })}
-              />
+              <Link
+                to={"/similar/"+similar.artist.name+"/"+similar.name}
+              >
+                <div
+                  className="track_image"
+                  style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
+                />
+              </Link>
             </div>
             <div>
               <Link

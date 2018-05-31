@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import * as lastfmActions from '../actions/lastfm';
 import TrackImage from '../components/TrackImage';
 import RecentTracks from '../components/RecentTracks';
-import SimilarImage from '../components/SimilarImage';
 import HomeNav from '../components/HomeNav';
 import LastfmUsernameForm from '../forms/LastfmUsernameForm';
 import * as pagesActions from '../actions/pages';

@@ -17,7 +17,9 @@ import Favorites from './pages/Favorites';
 import FavoritesPanel from './pages/FavoritesPanel';
 import Similar from './pages/Similar';
 import SimilarPanel from './pages/SimilarPanel';
-import SimilarOfTrackPanel from './components/SimilarOfTrackPanel';
+
+import SimilarToTrack from './pages/SimilarToTrack';
+import SimilarToTrackPanel from './pages/SimilarToTrackPanel';
 
 import MenuWrap from './menu/MenuWrap';
 
@@ -62,7 +64,13 @@ class App extends Component {
 		        />
 		      </div>
 		    )}/>
-        <SimilarOfTrackPanel/>
+        <Route exact path={"/similar/:artist/:track"} children={({ match }) => (
+		      <div>
+		        <SimilarToTrackPanel
+              isActive={Boolean(match) ? true : false}
+		        />
+		      </div>
+		    )}/>
         <Switch>
           <Route
             exact path="/"
@@ -99,6 +107,10 @@ class App extends Component {
           <Route
             path="/artist/:artist"
             render={(props) => <Artist {...props}/>}
+          />
+          <Route
+            path="/similar/:artist/:track"
+            render={(props) => <SimilarToTrack {...props}/>}
           />
         </Switch>
       </div>

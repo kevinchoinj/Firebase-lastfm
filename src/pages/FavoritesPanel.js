@@ -20,15 +20,19 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack
         {Object.entries(favorites).map((favorite, key)=>
           <div key={key} className="similar_container">
             <div className="track_image__container">
-              <div
-                className="track_image"
-                style={{backgroundImage: "url("+favorite[1].image+")"}}
-                onClick={()=>requestSimilarOfTrack({
-                  artist: favorite[1].artist,
-                  track: favorite[1].track,
-                  image: favorite[1].image,
-                })}
-              />
+              <Link
+                to={"/similar/"+favorite[1].artist+"/"+favorite[1].track}
+              >
+                <div
+                  className="track_image"
+                  style={{backgroundImage: "url("+favorite[1].image+")"}}
+                  onClick={()=>requestSimilarOfTrack({
+                    artist: favorite[1].artist,
+                    track: favorite[1].track,
+                    image: favorite[1].image,
+                  })}
+                />
+              </Link>
             </div>
             <div>
               <Link

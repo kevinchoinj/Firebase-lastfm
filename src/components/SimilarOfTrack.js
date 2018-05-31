@@ -63,7 +63,9 @@ class SimilarOfTrack extends React.Component {
 
     return currentSimilar && currentSimilar !== [] ? (
       <div className="favorite_panel__inner">
+
         <div className="similar_base__container">
+        {/*
           <div className="similar_container">
             <img
               src={similarBase.image}
@@ -71,6 +73,7 @@ class SimilarOfTrack extends React.Component {
               className="full_width"
             />
           </div>
+        */}
           <div className="similar_container">
             <div className="track_name">
               {similarBase.track}
@@ -79,20 +82,19 @@ class SimilarOfTrack extends React.Component {
               {similarBase.artist}
             </div>
           </div>
-        </div>
+      </div>
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
             <div className="track_image__container">
+              <Link
+                to={"/similar/"+similar.artist.name+"/"+similar.name}
+              >
               <div
                 className="track_image"
                 style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
-                onClick={()=>this.requestSimilarOfTrack({
-                  artist: similar.artist.name,
-                  track: similar.name,
-                  image: similar.image[2]["#text"],
-                })}
               />
+              </Link>
             </div>
             <div>
               <Link

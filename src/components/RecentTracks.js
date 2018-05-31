@@ -5,6 +5,8 @@ import unfilled from '../media/unfilled.png';
 import * as userActions from '../actions/users';
 import {bindActionCreators} from 'redux';
 import * as pagesActions from '../actions/pages';
+import * as lastfmActions from '../actions/lastfm';
+import {Link} from 'react-router-dom';
 
 const UserOptionsDisplay = ({
   loggedIn,
@@ -55,6 +57,11 @@ class RecentTracks extends React.Component {
   toggleSimilarOfTrack = () => {
     this.props.pagesActions.toggleSimilarOfTrack(false);
   }
+  requestSimilarOfTrack = (values) => {
+    this.props.lastfmActions.setSimilarOfTrack(values);
+    this.props.lastfmActions.requestSimilarOfTrack(values);
+    this.props.pagesActions.toggleSimilarOfTrack(true);
+  }
   render() {
 
     const {
@@ -71,11 +78,29 @@ class RecentTracks extends React.Component {
       {recentTracks.map((track, key) =>
         <div key={key} className="recent_tracks__object">
           <div className="spacing_bottom">
-            <div className="track_name">
-              {track.name}
+            <div>
+              <Link
+                to={"/track/"+track.artist["#text"]+"/"+track.name}
+                className="track_name"
+              >
+                {track.name}
+              </Link>
             </div>
-            <div className="track_artist">
-              {track.artist["#text"]}
+            <div>
+              <Link
+                to={"/artist/"+track.artist["#text"]}
+                className="track_artist"
+              >
+                {track.artist["#text"]}
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={"/similar/"+track.artist["#text"]+"/"+track.name}
+                className="track_artist"
+              >
+                Similar Tracks
+              </Link>
             </div>
           </div>
           <UserOptionsDisplay
@@ -102,5 +127,6 @@ export default connect(
   dispatch => ({
     userActions: bindActionCreators(userActions, dispatch),
     pagesActions: bindActionCreators(pagesActions, dispatch),
+    lastfmActions: bindActionCreators(lastfmActions, dispatch),
   }),
 )(RecentTracks);

@@ -7,7 +7,7 @@ const renderField = ({
   input,
   type,
   placeholder,
-  meta: { touched, error, warning }
+  meta: { touched, warning }
 }) => (
   <div>
     <input {...input}
@@ -15,14 +15,12 @@ const renderField = ({
       type={type}
       className="form_field"
     />
-    {touched &&
-      ((error && <span className="form_error">{error}</span>) ||
-        (warning && <span className="form_error">{warning}</span>))}
+
   </div>
 )
 
 const LastfmUsernameForm = props => {
-  const { handleSubmit, submitting, error } = props;
+  const { handleSubmit, submitting } = props;
   return (
     <form onSubmit={handleSubmit} className="spacing_left">
       <div className="form_label spacing_bottom">

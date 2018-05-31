@@ -1,13 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-
-import {bindActionCreators} from 'redux';
+import CloseButton from '../components/CloseButton';
 import SimilarImage from '../components/SimilarImage';
 import classNames from 'classnames';
+import {history} from '../store';
 
 class RegisterPanel extends React.Component {
   onSubmit = values => {
     this.props.authActions.signUpUserThenRedirect(values, '/');
+  }
+  returnHome = () => {
+    history.push("/");
   }
   render() {
     const {
@@ -23,6 +26,9 @@ class RegisterPanel extends React.Component {
 
     return (
       <div className={panelName}>
+        <CloseButton
+          toggleAction= {this.returnHome}
+        />
         <SimilarImage />
       </div>
     )
