@@ -59,13 +59,37 @@ class SimilarImage extends React.Component {
       currentSimilar,
       loggedIn,
       favorites,
+      currentTrack,
     } = this.props;
 
     return currentSimilar && currentSimilar[0] ? (
       <div className="favorite_panel__inner">
-        <div className="panel_title">
-          Similar Tracks
-        </div>
+
+        {currentTrack?
+        <div className="info_container">
+          <div className="live_indicator">
+            LIVE
+          </div>
+          <div>
+            <div>
+              <Link
+                to={"/track/"+currentTrack.artist.name+"/"+currentTrack.name}
+                className="track_name"
+              >
+                {currentTrack.name}
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={"/artist/"+currentTrack.artist.name}
+                className="track_artist"
+              >
+                {currentTrack.artist["#text"]}
+              </Link>
+            </div>
+          </div>
+        </div>:null}
+
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
             <div className="track_image__container">
@@ -121,6 +145,7 @@ export default connect(
     currentSimilar: state.lastfm.currentSimilar,
     favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
+    currentTrack: state.lastfm.currentTrack
   }),
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),

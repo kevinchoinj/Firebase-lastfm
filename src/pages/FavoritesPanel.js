@@ -9,13 +9,14 @@ import filled from '../media/filled.png';
 import CloseButton from '../components/CloseButton';
 import {history} from '../store';
 import {Link} from 'react-router-dom';
+import FontAwesome from 'react-fontawesome';
 
 const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack}) => {
   if (favorites){
     return(
       <div className="favorite_panel__inner">
-        <div className="panel_title">
-          Favorites
+        <div className="track_text info_container">
+          <strong>Favorites</strong>
         </div>
         {Object.entries(favorites).map((favorite, key)=>
           <div key={key} className="similar_container">
@@ -26,11 +27,6 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack
                 <div
                   className="track_image"
                   style={{backgroundImage: "url("+favorite[1].image+")"}}
-                  onClick={()=>requestSimilarOfTrack({
-                    artist: favorite[1].artist,
-                    track: favorite[1].track,
-                    image: favorite[1].image,
-                  })}
                 />
               </Link>
             </div>
@@ -76,11 +72,7 @@ class FavoritesPanel extends React.Component {
   removeFavoriteTrack=(artist, track)=> {
     this.props.userActions.removeFavoriteTrack(artist, track, '/');
   }
-  requestSimilarOfTrack = (values) => {
-    this.props.lastfmActions.setSimilarOfTrack(values);
-    this.props.lastfmActions.requestSimilarOfTrack(values);
-    this.props.pagesActions.toggleSimilarOfTrack(true);
-  }
+
   returnHome = () => {
     history.push("/");
   }
@@ -104,10 +96,15 @@ class FavoritesPanel extends React.Component {
         <CloseButton
           toggleAction= {this.returnHome}
         />
+        <div
+          className="back_button"
+          onClick={()=>history.goBack()}
+        >
+          <FontAwesome name="arrow-circle-left"/>
+        </div>
         <FavoritesDisplay
           favorites={favorites}
           removeFavoriteTrack = {this.removeFavoriteTrack}
-          requestSimilarOfTrack = {this.requestSimilarOfTrack}
         />
       </div>
     )

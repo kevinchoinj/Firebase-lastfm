@@ -82,7 +82,7 @@ const  requestTrackThenRequestSimilar = (values) => (dispatch, getState) => {
     "&api_key="
     +apiKey
     +
-    "&limit=5&format=json")
+    "&limit=3&format=json")
 	ourRequest.onload = function(){
 		if (ourRequest.status >= 200 && ourRequest.status < 400){
       let parsed = JSON.parse(ourRequest.responseText);

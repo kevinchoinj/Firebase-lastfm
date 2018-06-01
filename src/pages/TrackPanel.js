@@ -33,6 +33,14 @@ const AlbumTextDisplay = ({album, track}) => {
         <div className="track_text">
           {album.title}
         </div>
+        <div>
+          <Link
+            to={"/similar/"+track.artist.name+"/"+track.name}
+            className="track_artist"
+          >
+            Similar Tracks
+          </Link>
+        </div>
       </div>
     )
   }

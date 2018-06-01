@@ -4,6 +4,7 @@ import CloseButton from '../components/CloseButton';
 import SimilarImage from '../components/SimilarImage';
 import classNames from 'classnames';
 import {history} from '../store';
+import FontAwesome from 'react-fontawesome';
 
 const WatermarkDisplay = ({
   trackInfo
@@ -51,6 +52,12 @@ class SimilarPanel extends React.Component {
         <CloseButton
           toggleAction= {this.returnHome}
         />
+        <div
+          className="back_button"
+          onClick={()=>history.goBack()}
+        >
+          <FontAwesome name="arrow-circle-left"/>
+        </div>
         <SimilarImage />
       </div>
     ):null

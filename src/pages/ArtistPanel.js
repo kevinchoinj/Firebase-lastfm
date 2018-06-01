@@ -7,6 +7,7 @@ import {history} from '../store';
 import CloseButton from '../components/CloseButton';
 import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
+import {Link} from 'react-router-dom';
 
 const BioDisplay = ({bio}) => {
   if (bio){
@@ -21,14 +22,18 @@ const BioDisplay = ({bio}) => {
   }
 };
 
-const ImageDisplay = ({images}) => {
+const ImageDisplay = ({images, artist}) => {
   if (images){
     return(
-      <div>
-        <img
-          src={images[3]["#text"]}
-          alt="artist"
-        />
+      <div className="track_image__container">
+        <Link
+          to={"/artist/"+artist}
+        >
+          <div
+            className="track_image"
+            style={{backgroundImage: "url("+images[3]["#text"]+")"}}
+          />
+        </Link>
         {/*images.map((image, key)=>
           <div key={key}>
             <img
@@ -52,14 +57,21 @@ const SimilarDisplay = ({similar}) => {
   if (similar.artist){
     return(
       <div>
-        Similar Artists
-        <br/>
+        <div className="info_container">
+          Similar
+        </div>
         {similar.artist.map((artist, key)=>
-          <div key={key}>
-            {artist.name}
+          <div key={key} className="similar_container">
             <ImageDisplay
               images={artist.image}
+              artist={artist.name}
             />
+            <Link
+              to={"/artist/"+artist.name}
+              className="track_artist"
+            >
+              {artist.name}
+            </Link>
           </div>
         )}
       </div>
@@ -73,10 +85,10 @@ const SimilarDisplay = ({similar}) => {
 const StatsDisplay = ({stats}) => {
   if (stats){
     return(
-      <div>
-        Listeners: {stats.listeners}
+      <div className="track_text">
+        <strong>Listeners:</strong> {stats.listeners}
         <br/>
-        Playcount: {stats.playcount}
+        <strong>Playcount:</strong> {stats.playcount}
       </div>
     )
   }
@@ -88,13 +100,12 @@ const StatsDisplay = ({stats}) => {
 const TagsDisplay = ({tags}) => {
   if (tags.tag){
     return(
-      <div>
-        Tags
-        <br/>
+      <div className="track_text">
+        <strong>Tags:&nbsp;</strong>
         {tags.tag.map((tag, key)=>
-          <div key={key}>
-            {tag.name}
-          </div>
+          <span key={key}>
+            {tag.name},&nbsp;
+          </span>
         )}
       </div>
     )
@@ -157,24 +168,41 @@ class Register extends React.Component {
           <FontAwesome name="arrow-circle-left"/>
         </div>
         <div className="side_right__inner">
+
           <div className="info_container">
-            {artistInfo.name}
-            <ImageDisplay
-              images={artistInfo.image}
-            />
-            <StatsDisplay
-              stats={artistInfo.stats}
-            />
-            <TagsDisplay
-              tags={artistInfo.tags}
-            />
-            <BioDisplay
-              bio={artistInfo.bio}
-            />
-            <SimilarDisplay
-              similar={artistInfo.similar}
-            />
+            <div>
+              {artistInfo.image?
+
+                <img src={artistInfo.image[3]["#text"]}
+                 alt="artist"
+                 className="spacing_right"
+                />
+
+              :null}
+
+              <div className="track_text">
+                <strong>{artistInfo.name}</strong>
+              </div>
+            </div>
+
+            <div>
+              <StatsDisplay
+                stats={artistInfo.stats}
+              />
+              <TagsDisplay
+                tags={artistInfo.tags}
+              />
+            </div>
           </div>
+
+          <div className="info_container">
+          <BioDisplay
+            bio={artistInfo.bio}
+          />
+          </div>
+          <SimilarDisplay
+            similar={artistInfo.similar}
+          />
         </div>
       </div>
     ):null

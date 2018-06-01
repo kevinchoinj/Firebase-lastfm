@@ -29,8 +29,8 @@ class Home extends React.Component {
               onSubmit={this.onSubmit}
             />
           </div>
-          <div className="lastfm_username">
-            {lastfmUsername}
+          <div className="track_text">
+            <strong>{lastfmUsername}</strong>
           </div>
           <TrackImage/>
           <RecentTracks/>

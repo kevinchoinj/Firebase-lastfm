@@ -67,21 +67,23 @@ class TrackImage extends React.Component {
 
     return currentTrack ? (
       <div className="current_container">
-        {currentTrack.image[3] && (currentTrack.image[3]["#text"] !== "") ?
-        <img
-          src={currentTrack.image[3]["#text"]}
-          alt="track"
-          className="full_width"
-          onClick = {this.toggleSimilarOfTrack}
-        />
-        :
-        <img
-          src={lastfmImage}
-          alt="lastfm"
-          className="full_width"
-          onClick = {this.toggleSimilarOfTrack}
-        />
-        }
+        <Link to="/similar">
+          {currentTrack.image[3] && (currentTrack.image[3]["#text"] !== "") ?
+          <img
+            src={currentTrack.image[3]["#text"]}
+            alt="track"
+            className="full_width"
+            onClick = {this.toggleSimilarOfTrack}
+          />
+          :
+          <img
+            src={lastfmImage}
+            alt="lastfm"
+            className="full_width"
+            onClick = {this.toggleSimilarOfTrack}
+          />
+          }
+        </Link>
         <div>
           <Link
             to={"/track/"+currentTrack.artist["#text"]+"/"+currentTrack.name}

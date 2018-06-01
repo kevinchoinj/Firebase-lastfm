@@ -65,24 +65,27 @@ class SimilarOfTrack extends React.Component {
     return currentSimilar && currentSimilar !== [] ? (
 
       <div className="favorite_panel__inner">
+        {trackInfo?
         <div className="info_container">
           <div>
-            <Link
-              to={"/track/"+trackInfo.artist.name+"/"+trackInfo.name}
-              className="track_name"
-            >
-              {trackInfo.name}
-            </Link>
+            <div>
+              <Link
+                to={"/track/"+trackInfo.artist.name+"/"+trackInfo.name}
+                className="track_name"
+              >
+                {trackInfo.name}
+              </Link>
+            </div>
+            <div>
+              <Link
+                to={"/artist/"+trackInfo.artist.name}
+                className="track_artist"
+              >
+                {trackInfo.artist.name}
+              </Link>
+            </div>
           </div>
-          <div>
-            <Link
-              to={"/artist/"+trackInfo.artist.name}
-              className="track_artist"
-            >
-              {trackInfo.artist.name}
-            </Link>
-          </div>
-        </div>
+        </div>:null}
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">

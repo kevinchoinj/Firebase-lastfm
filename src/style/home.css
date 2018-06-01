@@ -6,6 +6,7 @@
 }
 .info_container {
   padding: 0px 25px 25px 25px;
+  display: flex;
 }
 .current_container {
   margin: 0 auto;
@@ -54,6 +55,7 @@
 }
 .favorite_panel__inner {
   padding-top: 75px;
+  padding-bottom: 50px;
 }
 .favorite_panel--display {
   right: 0px;
@@ -287,6 +289,17 @@
   -moz-transition: .2s linear;
   -o-transition: .2s linear;
   transition: .2s linear;
+}
+.live_indicator {
+  background-color: #cc0000;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  padding: 5px;
+  font-weight: 600;
+  font-size: 9px;
+  height: 11px;
+  margin-right: 14px;
 }
 @media screen and (max-width: 992px) {
   .similar_container {
