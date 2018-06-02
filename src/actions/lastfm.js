@@ -1,4 +1,4 @@
-let json = require('../config.json');
+//let json = require('../config.json');
 //let apiKey= json.loginid;
 let apiKey = process.env.REACT_APP_LASTFM_KEY;
 
