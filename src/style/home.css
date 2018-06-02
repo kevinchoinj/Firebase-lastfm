@@ -316,4 +316,11 @@
   .current_container {
     width: 50%;
   }
+  .favorite_panel {
+    width: 100%;
+    right: -100%;
+  }
+  .favorite_panel--display {
+    right: 0px;
+  }
 }

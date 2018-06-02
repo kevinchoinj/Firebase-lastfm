@@ -57,7 +57,6 @@ class SimilarOfTrack extends React.Component {
       currentSimilar,
       loggedIn,
       favorites,
-      similarBase,
       trackInfo,
     } = this.props;
 
@@ -142,7 +141,6 @@ export default connect(
     currentSimilar: state.lastfm.similarOfTrack,
     favorites: state.users.favorites,
     loggedIn: state.authentication.loggedIn,
-    similarBase: state.lastfm.similarOfBase,
     trackInfo: state.lastfm.trackInfo,
   }),
   dispatch => ({

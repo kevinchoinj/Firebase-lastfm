@@ -41,6 +41,41 @@ const UserOptionsDisplay = ({
   }
 };
 
+const CurrentTrackDisplay = ({
+  currentTrack
+  }) => {
+  if (currentTrack){
+    return (
+      <div className="info_container">
+        <div className="live_indicator">
+          LIVE
+        </div>
+        <div>
+          <div>
+            <Link
+              to={"/track/"+currentTrack.artist.name+"/"+currentTrack.name}
+              className="track_name"
+            >
+              {currentTrack.name}
+            </Link>
+          </div>
+          <div>
+            <Link
+              to={"/artist/"+currentTrack.artist.name}
+              className="track_artist"
+            >
+              {currentTrack.artist["#text"]}
+            </Link>
+          </div>
+        </div>
+      </div>
+    )
+  }
+  else {
+    return null;
+  }
+};
+
 class SimilarImage extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
     this.props.userActions.addFavoriteTrack(artist, track, image);
@@ -65,30 +100,9 @@ class SimilarImage extends React.Component {
     return currentSimilar && currentSimilar[0] ? (
       <div className="favorite_panel__inner">
 
-        {currentTrack?
-        <div className="info_container">
-          <div className="live_indicator">
-            LIVE
-          </div>
-          <div>
-            <div>
-              <Link
-                to={"/track/"+currentTrack.artist.name+"/"+currentTrack.name}
-                className="track_name"
-              >
-                {currentTrack.name}
-              </Link>
-            </div>
-            <div>
-              <Link
-                to={"/artist/"+currentTrack.artist.name}
-                className="track_artist"
-              >
-                {currentTrack.artist["#text"]}
-              </Link>
-            </div>
-          </div>
-        </div>:null}
+        <CurrentTrackDisplay
+          currentTrack={currentTrack}
+        />
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
@@ -132,7 +146,10 @@ class SimilarImage extends React.Component {
     :
     (
       <div className="favorite_panel__inner">
-        <div className="panel_notfound">
+        <CurrentTrackDisplay
+          currentTrack={currentTrack}
+        />
+        <div className="info_container track_text">
           Similar tracks not found
         </div>
       </div>

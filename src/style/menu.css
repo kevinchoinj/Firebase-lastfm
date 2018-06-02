@@ -13,6 +13,7 @@
   -o-transition: .8s ease-out;
   transition: .8s ease-out;
   z-index: 3;
+  display: none;
 }
 
 .menu_panel--hidden{
@@ -68,6 +69,7 @@
   -o-transition: .25s ease-out;
   transition: .25s ease-out;
   z-index: 5;
+  display: none;
 }
 
 .menu_btn__container{
@@ -154,11 +156,15 @@
     left: 0px;
     bottom: 0px;
     transform: rotate(0deg);
+    display: block;
   }
 
   .menu_panel--hidden{
     left: 100vw;
-    bottom: 100vh;
+    bottom: 0px;
+  }
+  .menu_btn {
+    display: block;
   }
 
 }

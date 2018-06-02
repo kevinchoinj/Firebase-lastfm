@@ -42,7 +42,6 @@ class FavoritesPanel extends React.Component {
   }
   render() {
     const {
-      loggedIn,
       isActive,
       trackInfo,
     } = this.props;
@@ -55,7 +54,7 @@ class FavoritesPanel extends React.Component {
     );
 
 
-    return loggedIn ? (
+    return (
       <div className={panelName}>
        <WatermarkDisplay
           trackInfo = {trackInfo}
@@ -72,13 +71,11 @@ class FavoritesPanel extends React.Component {
         <SimilarOfTrack/>
       </div>
     )
-    :null;
   }
 }
 
 export default connect(
   (state, ownProps) => ({
-    loggedIn: state.authentication.loggedIn,
     trackInfo: state.lastfm.trackInfo,
   }),
   dispatch => ({
