@@ -9,11 +9,11 @@ import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
 import {Link} from 'react-router-dom';
 
-const BioDisplay = ({bio}) => {
+const BioDisplay = ({bio, createMarkup}) => {
   if (bio){
     return(
-      <div>
-        {bio.content}
+      <div className="bio_text">
+        <div dangerouslySetInnerHTML={createMarkup(bio.content)} />
       </div>
     )
   }
@@ -34,14 +34,6 @@ const ImageDisplay = ({images, artist}) => {
             style={{backgroundImage: "url("+images[3]["#text"]+")"}}
           />
         </Link>
-        {/*images.map((image, key)=>
-          <div key={key}>
-            <img
-              src={image["#text"]}
-              alt="artist image"
-            />
-          </div>
-        )*/}
       </div>
     )
   }
@@ -57,8 +49,8 @@ const SimilarDisplay = ({similar}) => {
   if (similar.artist){
     return(
       <div>
-        <div className="info_container">
-          Similar
+        <div className="info_container track_text">
+          <strong>Similar</strong>
         </div>
         {similar.artist.map((artist, key)=>
           <div key={key} className="similar_container">
@@ -140,6 +132,10 @@ class Register extends React.Component {
   returnHome = () => {
     history.push("/");
   }
+  createMarkup = (bioText) => {
+    return {__html: bioText};
+  }
+
   render() {
     const {
       artistInfo,
@@ -198,6 +194,7 @@ class Register extends React.Component {
           <div className="info_container">
           <BioDisplay
             bio={artistInfo.bio}
+            createMarkup={this.createMarkup}
           />
           </div>
           <SimilarDisplay

@@ -40,6 +40,32 @@ const UserOptionsDisplay = ({
   }
 };
 
+const TrackImageDisplay = ({
+  trackInfo
+  }) => {
+  if (trackInfo.album){
+    if (trackInfo.album.image){
+      return (
+        <div className="similar_container">
+          <div className="track_image__container">
+            <div
+              className="track_image"
+              style={{backgroundImage:"url("+trackInfo.album.image[3]["#text"]+")"}}
+            />
+          </div>
+        </div>
+      )
+    }
+    else {
+      return null;
+    }
+  }
+  else {
+    return null;
+  }
+};
+
+
 class SimilarOfTrack extends React.Component {
   addFavoriteTrack=(artist, track, image)=> {
     this.props.userActions.addFavoriteTrack(artist, track, image);
@@ -65,8 +91,11 @@ class SimilarOfTrack extends React.Component {
 
       <div className="favorite_panel__inner">
         {trackInfo?
-        <div className="info_container">
-          <div>
+        <div className="header_track__container spacing_bottom__small">
+          <TrackImageDisplay
+            trackInfo={trackInfo}
+          />
+          <div className="header_track__text">
             <div>
               <Link
                 to={"/track/"+trackInfo.artist.name+"/"+trackInfo.name}
@@ -92,10 +121,10 @@ class SimilarOfTrack extends React.Component {
               <Link
                 to={"/similar/"+similar.artist.name+"/"+similar.name}
               >
-              <div
-                className="track_image"
-                style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
-              />
+                <div
+                  className="track_image"
+                  style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
+                />
               </Link>
             </div>
             <div>

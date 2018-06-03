@@ -1,6 +1,5 @@
-//let json = require('../config.json');
-//let apiKey= json.loginid;
-let apiKey = process.env.REACT_APP_LASTFM_KEY;
+let json = require('../config.json');
+let apiKey= json.loginid;
 
 export const RECEIVE_TRACK = 'RECEIVE_TRACK';
 export const RECEIVE_SIMILAR = 'RECEIVE_SIMILAR';
