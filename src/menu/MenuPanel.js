@@ -1,34 +1,30 @@
 import React from 'react';
-import classNames from 'classnames';
 import {connect} from 'react-redux';
+import classNames from 'classnames';
 
-class MenuPanel extends React.Component{
+class MenuPanelOne extends React.Component{
   render(){
-
     const {
-      isHidden,
+      menuDisplay,
     } = this.props;
 
     const menuClassName = classNames(
       'menu_panel',
       {
-        'menu_panel--hidden':isHidden
+        'menu_panel--display': menuDisplay
       }
     );
 
     return(
-      <div
-        className = {menuClassName}
-      >
-      </div>
+      <div className = {menuClassName}/>
     )
   }
 }
 
 export default connect(
   (state, ownProps) => ({
-    isHidden:state.menu.isHidden,
+    menuDisplay: state.menu.menuDisplay,
   }),
   dispatch => ({
   }),
-)(MenuPanel);
+)(MenuPanelOne);

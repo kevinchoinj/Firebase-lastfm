@@ -3,8 +3,8 @@ import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import * as authActions from '../actions/authentication';
-import * as menuActions from '../actions/menu';
+import * as authActions from 'actions/authentication';
+import * as menuActions from 'actions/menu';
 
 const LoginDisplay = ({loggedIn, signOut, toggleMenu}) => {
   if (loggedIn){
@@ -65,13 +65,13 @@ class MenuText extends React.Component{
 
     const {
       loggedIn,
-      isHidden,
+      menuDisplay,
     } = this.props;
 
     const menuClassName = classNames(
       'menu_panel__links',
       {
-        'menu_panel__links--hidden':isHidden
+        'menu_panel__links--display':menuDisplay
       }
     );
 
@@ -99,7 +99,7 @@ class MenuText extends React.Component{
 export default connect(
   (state, ownProps) => ({
     loggedIn: state.authentication.loggedIn,
-    isHidden:state.menu.isHidden,
+    menuDisplay:state.menu.menuDisplay,
   }),
   dispatch => ({
     menuActions: bindActionCreators(menuActions, dispatch),

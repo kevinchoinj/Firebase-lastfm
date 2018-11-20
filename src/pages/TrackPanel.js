@@ -1,14 +1,16 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import CloseButton from '../components/CloseButton';
-import * as pagesActions from '../actions/pages';
-import * as lastfmActions from '../actions/lastfm';
-import lastfmImage from '../media/lastfm.png';
 import {Link} from 'react-router-dom';
-import FontAwesome from 'react-fontawesome';
-import {history} from '../store';
+import {history} from 'store';
 import classNames from 'classnames';
+import FontAwesome from 'react-fontawesome';
+
+import * as pagesActions from 'actions/pages';
+import * as lastfmActions from 'actions/lastfm';
+
+import CloseButton from 'components/CloseButton';
+import lastfmImage from 'media/lastfm.png';
 
 const AlbumTextDisplay = ({album, track}) => {
   if (track.artist){

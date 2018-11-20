@@ -1,13 +1,15 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as lastfmActions from '../actions/lastfm';
-import TrackImage from '../components/TrackImage';
-import RecentTracks from '../components/RecentTracks';
-import HomeNav from '../components/HomeNav';
-import LastfmUsernameForm from '../forms/LastfmUsernameForm';
-import * as pagesActions from '../actions/pages';
 import {Link} from 'react-router-dom';
+
+import * as lastfmActions from 'actions/lastfm';
+import * as pagesActions from 'actions/pages';
+
+import TrackImage from 'components/TrackImage';
+import RecentTracks from 'components/RecentTracks';
+import HomeNav from 'components/HomeNav';
+import LastfmUsernameForm from 'forms/LastfmUsernameForm';
 
 const CurrentTrackDisplay = ({
   currentTrack

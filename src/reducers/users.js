@@ -1,6 +1,6 @@
 import {
   GET_FAVORITES_SUCCEEDED,
-} from '../actions/users'
+} from 'actions/users'
 
 const DEFAULT_STATE={
   favorites: null,

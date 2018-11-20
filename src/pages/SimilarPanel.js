@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import CloseButton from '../components/CloseButton';
-import SimilarImage from '../components/SimilarImage';
 import classNames from 'classnames';
-import {history} from '../store';
+import {history} from 'store';
 import FontAwesome from 'react-fontawesome';
+
+import CloseButton from 'components/CloseButton';
+import SimilarImage from 'components/SimilarImage';
 
 const WatermarkDisplay = ({
   trackInfo

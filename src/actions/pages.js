@@ -1,9 +1,9 @@
-import fire from '../fire';
-import {history} from '../store';
+import fire from 'fire';
+import {history} from 'store';
 
 export const GET_PAGES_SUCCEEDED = 'GET_PAGES_SUCCEEDED';
 export const TOGGLE_SIMILAR_OF_TRACK = 'TOGGLE_SIMILAR_OF_TRACK';
-export const SET_PAGE_NAME = 'SET_PAGE_NAME';
+export const SET_PAGE = 'SET_PAGE';
 
 export function getPages() {
   return function (dispatch) {
@@ -33,9 +33,9 @@ export const toggleSimilarOfTrack = (displayed) =>{
   };
 }
 
-export const setPageName = (pageName) => {
+export const setPage = (currentPage) => {
   return{
-    type: SET_PAGE_NAME,
-    pageName,
+    type: SET_PAGE,
+    currentPage,
   };
 }

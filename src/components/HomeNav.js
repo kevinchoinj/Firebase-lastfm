@@ -2,22 +2,38 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import classNames from 'classnames';
-import * as authActions from '../actions/authentication';
-import * as pagesActions from '../actions/pages';
+import * as authActions from 'actions/authentication';
+import * as pagesActions from 'actions/pages';
 
-const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName, loginName, registerName}) => {
+const LinkSelected = ({isSelected, children}) => {
+  if (isSelected) {
+    return (
+      <div className="home_nav__link--selected">
+        {children}
+      </div>
+    )
+  }
+  else {
+    return (
+      <div className="home_nav__link">
+        {children}
+      </div>
+    )
+  }
+}
+
+const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesSelected, registerSelected, loginSelected}) => {
   if (loggedIn){
     return(
       <div>
-        <Link
-          className={favoritesName}
-          to="/favorites"
-          onClick={()=>toggleSimilarOfTrack()}
-        >
-          Favorites
-        </Link>
-
+        <LinkSelected isSelected={favoritesSelected}>
+          <Link
+            to="/favorites"
+            onClick={()=>toggleSimilarOfTrack()}
+          >
+            Favorites
+          </Link>
+        </LinkSelected>
         <div
           onClick={()=>signOut()}
           className="home_nav__link"
@@ -30,24 +46,22 @@ const LoginDisplay = ({loggedIn, signOut, toggleSimilarOfTrack, favoritesName, l
   else {
     return (
     <div>
-      <div>
+      <LinkSelected isSelected={registerSelected}>
         <Link
-          className={registerName}
           to="/register"
           onClick={()=>toggleSimilarOfTrack()}
         >
           Register
         </Link>
-      </div>
-      <div>
+      </LinkSelected>
+      <LinkSelected isSelected={loginSelected}>
         <Link
-          className={loginName}
           to="/login"
           onClick={()=>toggleSimilarOfTrack()}
         >
           Log In
         </Link>
-      </div>
+      </LinkSelected>
     </div>
     );
   }
@@ -65,62 +79,33 @@ class HomeNav extends React.Component{
 
     const {
       loggedIn,
-      pageName,
+      currentPage,
     } = this.props;
-
-    const homeName= classNames(
-      'home_nav__link',
-      {
-        'home_nav__link--selected': pageName === "lastfmHome",
-      }
-    );
-    const similarName= classNames(
-      'home_nav__link',
-      {
-        'home_nav__link--selected': pageName === "lastfmSimilar",
-      }
-    );
-    const favoritesName= classNames(
-      'home_nav__link',
-      {
-        'home_nav__link--selected': pageName === "lastfmFavorites",
-      }
-    );
-    const loginName= classNames(
-      'home_nav__link',
-      {
-        'home_nav__link--selected': pageName === "lastfmLogin",
-      }
-    );
-    const registerName= classNames(
-      'home_nav__link',
-      {
-        'home_nav__link--selected': pageName === "lastfmRegister",
-      }
-    );
-
 
     return(
       <div className="spacing_bottom">
-        <Link
-          className={homeName}
-          to="/"
-          onClick = {this.toggleSimilarOfTrack}
-        >
-          Home
-        </Link>
-        <br/>
-        <Link
-          className={similarName}
-          to="/similar"
-          onClick = {this.toggleSimilarOfTrack}
-        >
-          Similar
-        </Link>
+        <LinkSelected isSelected= {currentPage==="lastfmHome"}>
+          <Link
+            to="/"
+            onClick = {this.toggleSimilarOfTrack}
+          >
+            Home
+          </Link>
+        </LinkSelected>
+
+        <LinkSelected isSelected= {currentPage==="lastfmSimilar"}>
+          <Link
+            to="/similar"
+            onClick = {this.toggleSimilarOfTrack}
+          >
+            Similar
+          </Link>
+        </LinkSelected>
+
         <LoginDisplay
-          favoritesName={favoritesName}
-          loginName={loginName}
-          registerName={registerName}
+          favoritesSelected={currentPage === "lastfmFavorites"}
+          registerSelected={currentPage === "lastfmRegister"}
+          loginSelected={currentPage === "lastfmLogin"}
           loggedIn={loggedIn}
           signOut={this.signOut}
           toggleSimilarOfTrack={this.toggleSimilarOfTrack}
@@ -133,7 +118,7 @@ class HomeNav extends React.Component{
 export default connect(
   (state, ownProps) => ({
     loggedIn: state.authentication.loggedIn,
-    pageName: state.pages.pageName,
+    currentPage: state.pages.currentPage,
   }),
   dispatch => ({
     pagesActions: bindActionCreators(pagesActions, dispatch),

@@ -5,7 +5,7 @@ import * as pagesActions from '../actions/pages';
 
 class HomePage extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmHome');
+    this.props.pagesActions.setPage('lastfmHome');
   }
   render() {
     return null;

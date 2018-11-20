@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './style/index.css';
-import './style/menu.css';
-import './style/home.css';
+import 'styles/index.css';
+import 'styles/menu.css';
+import 'styles/home.css';
+import 'styles/panels.css';
 
 import App from './App';
 

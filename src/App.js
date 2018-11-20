@@ -1,33 +1,32 @@
 import React, { Component } from 'react';
 import {Switch, Route} from 'react-router-dom';
 
-import Home from './pages/Home';
+import Home from 'pages/Home';
 
-import Artist from './pages/Artist';
-import Track from './pages/Track';
-import ArtistPanel from './pages/ArtistPanel';
-import TrackPanel from './pages/TrackPanel';
+import Artist from 'pages/Artist';
+import Track from 'pages/Track';
+import ArtistPanel from 'pages/ArtistPanel';
+import TrackPanel from 'pages/TrackPanel';
 
-import HomePage from './pages/HomePage';
-import Login from './pages/Login';
-import LoginPanel from './pages/LoginPanel';
-import Register from './pages/Register';
-import RegisterPanel from './pages/RegisterPanel';
-import Admin from './pages/Admin';
-import DefaultPage from './pages/DefaultPage';
-import Favorites from './pages/Favorites';
-import FavoritesPanel from './pages/FavoritesPanel';
-import Similar from './pages/Similar';
-import SimilarPanel from './pages/SimilarPanel';
+import HomePage from 'pages/HomePage';
+import Login from 'pages/Login';
+import LoginPanel from 'pages/LoginPanel';
+import Register from 'pages/Register';
+import RegisterPanel from 'pages/RegisterPanel';
+import DefaultPage from 'pages/DefaultPage';
+import Favorites from 'pages/Favorites';
+import FavoritesPanel from 'pages/FavoritesPanel';
+import Similar from 'pages/Similar';
+import SimilarPanel from 'pages/SimilarPanel';
 
-import SimilarToTrack from './pages/SimilarToTrack';
-import SimilarToTrackPanel from './pages/SimilarToTrackPanel';
+import SimilarToTrack from 'pages/SimilarToTrack';
+import SimilarToTrackPanel from 'pages/SimilarToTrackPanel';
 
-import MenuWrap from './menu/MenuWrap';
+import MenuWrap from 'menu/MenuWrap';
 
-import SetUser from './requests/SetUser';
-import GetPages from './requests/GetPages';
-import GetSong from './requests/GetSong';
+import SetUser from 'requests/SetUser';
+import GetPages from 'requests/GetPages';
+import GetSong from 'requests/GetSong';
 
 class App extends Component {
   render() {
@@ -107,10 +106,6 @@ class App extends Component {
           <Route
             exact path="/favorites"
             render={(props) => <Favorites {...props}/>}
-          />
-          <Route
-            exact path="/admin"
-            render={(props) => <Admin {...props}/>}
           />
           <Route
             path="/test/:id"

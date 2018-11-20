@@ -1,4 +1,4 @@
-let json = require('../config.json');
+let json = require('config.json');
 let apiKey= json.loginid;
 
 export const RECEIVE_TRACK = 'RECEIVE_TRACK';

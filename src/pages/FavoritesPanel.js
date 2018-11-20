@@ -1,15 +1,17 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as userActions from '../actions/users';
-import * as lastfmActions from '../actions/lastfm';
-import * as pagesActions from '../actions/pages';
 import {bindActionCreators} from 'redux';
-import classNames from 'classnames';
-import filled from '../media/filled.png';
-import CloseButton from '../components/CloseButton';
-import {history} from '../store';
 import {Link} from 'react-router-dom';
+import {history} from 'store';
 import FontAwesome from 'react-fontawesome';
+import classNames from 'classnames';
+
+import * as userActions from 'actions/users';
+import * as lastfmActions from 'actions/lastfm';
+import * as pagesActions from 'actions/pages';
+
+import CloseButton from 'components/CloseButton';
+import filled from 'media/filled.png';
 
 const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack}) => {
   if (favorites){
@@ -20,56 +22,51 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack
         </div>
         {Object.entries(favorites).map((favorite, key)=>
           <div key={key} className="similar_container">
+          <Link to={"/similar/"+favorite[1].artist+"/"+favorite[1].track}>
             <div className="track_image__container">
-              <Link
-                to={"/similar/"+favorite[1].artist+"/"+favorite[1].track}
-              >
-                <div
-                  className="track_image"
-                  style={{backgroundImage: "url("+favorite[1].image+")"}}
-                />
-              </Link>
+              <img src={favorite[1].image} className="track_image" alt="track"/>
+              <div className="track_image__overlay"/>
+              <div className="track_image__text">
+                <div className="track_image__text_track">
+                  <Link to={"/track/"+favorite[1].artist+"/"+favorite[1].track}>
+                    {favorite[1].track}
+                  </Link>
+                </div>
+                <div className="track_image__text_artist">
+                  <Link to={"/artist/"+favorite[1].artist}>
+                    {favorite[1].artist}
+                  </Link>
+                </div>
+                <div>
+                  <img
+                    className="favorite_icon"
+                    src={filled}
+                    onClick={(e)=>removeFavoriteTrack(
+                    e,
+                    favorite[1].artist,
+                    favorite[1].track)}
+                    alt="filled"
+                  />
+                </div>
+              </div>
             </div>
-            <div>
-              <Link
-                to={"/track/"+favorite[1].artist+"/"+favorite[1].track}
-                className="track_name"
-              >
-                {favorite[1].track}
-              </Link>
-            </div>
-            <div>
-              <Link
-                to={"/artist/"+favorite[1].artist}
-                className="track_artist"
-              >
-                {favorite[1].artist}
-              </Link>
-            </div>
-            <div>
-              <img
-                className="favorite_icon"
-                src={filled}
-                onClick={()=>removeFavoriteTrack(
-                favorite[1].artist,
-                favorite[1].track)}
-                alt="filled"
-              />
-            </div>
-          </div>
+          </Link>
+        </div>
         )}
       </div>
     )
   }
   else {
-    return (<div></div>);
+    return null;
   }
 };
 
 
 class FavoritesPanel extends React.Component {
 
-  removeFavoriteTrack=(artist, track)=> {
+  removeFavoriteTrack=(e, artist, track)=> {
+    e.stopPropagation();
+    e.preventDefault();
     this.props.userActions.removeFavoriteTrack(artist, track, '/');
   }
 

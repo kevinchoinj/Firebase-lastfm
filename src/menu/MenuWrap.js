@@ -1,8 +1,8 @@
 import React from 'react';
 
-import MenuPanel from './MenuPanel';
-import MenuButton from './MenuButton';
-import MenuText from './MenuText';
+import MenuPanel from 'menu/MenuPanel';
+import MenuButton from 'menu/MenuButton';
+import MenuText from 'menu/MenuText';
 
 class Menuwrap extends React.Component{
   render(){

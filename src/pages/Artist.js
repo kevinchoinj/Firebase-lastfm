@@ -1,12 +1,12 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as pagesActions from '../actions/pages';
-import * as lastfmActions from '../actions/lastfm';
+import * as pagesActions from 'actions/pages';
+import * as lastfmActions from 'actions/lastfm';
 
 class Artist extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmArtist');
+    this.props.pagesActions.setPage('lastfmArtist');
     this.props.lastfmActions.getArtistInfo({artist:this.props.match.params.artist});
   }
   componentDidUpdate(){

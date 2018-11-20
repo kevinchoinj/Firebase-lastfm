@@ -5,12 +5,6 @@
 .header_track__container {
   display: flex;
 }
-.similar_container {
-  display: inline-block;
-  width: calc(16.666% - 50px);
-  margin: 5px 25px 10px 25px;
-  vertical-align: top;
-}
 .info_container {
   padding: 0px 25px 25px 25px;
   display: flex;
@@ -62,7 +56,6 @@
 }
 .favorite_panel__inner {
   padding-top: 75px;
-  padding-bottom: 50px;
 }
 .favorite_panel--display {
   right: 0px;
@@ -86,11 +79,6 @@
 }
 .half_panel__inner {
    padding: 75px 25px 25px 25px;
-}
-.favorite_icon {
-  cursor: pointer;
-  line-height: 20px;
-  vertical-align: middle;
 }
 .form_field {
   width: 100%;
@@ -166,7 +154,9 @@
   font-size: 48px;
 }
 
-.home_nav__link {
+.home_nav__link,
+.home_nav__link a,
+.home_nav__link--selected a {
   color: #fff;
   font-size: 17px;
   cursor: pointer;
@@ -178,13 +168,17 @@
   -o-transition: .4s ease-out;
   transition: .4s ease-out;
 }
-.home_nav__link:hover {
-  color: #111;
+.home_nav__link:hover,
+.home_nav__link:hover a{
+  color: #aaa;
 }
-.home_nav__link--selected {
-  color: #111;
+
+.home_nav__link--selected,
+.home_nav__link--selected a{
+  color: #aaa;
 }
-.home_nav__link--selected:hover {
+.home_nav__link--selected:hover,
+.home_nav__link--selected:hover a{
   cursor: default;
 }
 
@@ -219,34 +213,6 @@
   vertical-align: middle;
   color: #ddd;
 }
-.track_image__container {
-  width: 100%;
-  padding-top: calc(100% + 7px);
-  overflow: hidden;
-  position:relative;
-}
-.track_image {
-  width: 100%;
-  padding-top: 100%;
-  cursor: pointer;
-  position:absolute;
-  top: 0px;
-  background-repeat: no-repeat;
-  background-size: cover;
-  -webkit-transition: .2s linear;
-  -moz-transition: .2s linear;
-  -o-transition: .2s linear;
-  transition: .2s linear;
-  transform: scale(1,1);
-}
-.track_image:hover {
-  transform: scale(1.1, 1.1);
-}
-.track_name:hover,
-.track_artist:hover {
-  color: #aaa;
-}
-
 
 .form_label {
   font-weight: 600;
@@ -296,17 +262,6 @@
   -moz-transition: .2s linear;
   -o-transition: .2s linear;
   transition: .2s linear;
-}
-.live_indicator {
-  background-color: #cc0000;
-  border-radius: 4px;
-  color: #fff;
-  display: inline-block;
-  padding: 5px;
-  font-weight: 600;
-  font-size: 9px;
-  height: 11px;
-  margin-right: 14px;
 }
 .bio_text {
   line-height:150%;

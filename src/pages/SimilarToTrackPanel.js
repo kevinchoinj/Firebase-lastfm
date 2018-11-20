@@ -1,14 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as userActions from '../actions/users';
-import * as lastfmActions from '../actions/lastfm';
-import * as pagesActions from '../actions/pages';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
-import CloseButton from '../components/CloseButton';
-import {history} from '../store';
-import SimilarOfTrack from '../components/SimilarOfTrack';
 import FontAwesome from 'react-fontawesome';
+
+import * as userActions from 'actions/users';
+import * as lastfmActions from 'actions/lastfm';
+import * as pagesActions from 'actions/pages';
+
+import CloseButton from 'components/CloseButton';
+import {history} from 'store';
+import SimilarOfTrack from 'components/SimilarOfTrack';
 
 const WatermarkDisplay = ({
   trackInfo

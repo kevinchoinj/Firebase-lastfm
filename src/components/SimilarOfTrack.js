@@ -1,11 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import * as userActions from '../actions/users';
-import * as lastfmActions from '../actions/lastfm';
 import {bindActionCreators} from 'redux';
-import filled from '../media/filled.png';
-import unfilled from '../media/unfilled.png';
 import {Link} from 'react-router-dom';
+import {history} from 'store';
+
+import * as userActions from 'actions/users';
+import * as lastfmActions from 'actions/lastfm';
+
+import filled from 'media/filled.png';
+import unfilled from 'media/unfilled.png';
 
 const UserOptionsDisplay = ({
   loggedIn,
@@ -21,14 +24,14 @@ const UserOptionsDisplay = ({
           <img
             className="favorite_icon"
             src={filled}
-            onClick={()=>removeFavoriteTrack(similar.artist.name, similar.name)}
+            onClick={(e)=>removeFavoriteTrack(e,similar.artist.name, similar.name)}
             alt="filled"
           />
           :
           <img
             className="favorite_icon"
             src={unfilled}
-            onClick={()=>addFavoriteTrack(similar.artist.name, similar.name, similar.image[2]["#text"])}
+            onClick={(e)=>addFavoriteTrack(e, similar.artist.name, similar.name, similar.image[2]["#text"])}
             alt="unfilled"
           />
         }
@@ -40,42 +43,25 @@ const UserOptionsDisplay = ({
   }
 };
 
-const TrackImageDisplay = ({
-  trackInfo
-  }) => {
-  if (trackInfo.album){
-    if (trackInfo.album.image){
-      return (
-        <div className="similar_container">
-          <div className="track_image__container">
-            <div
-              className="track_image"
-              style={{backgroundImage:"url("+trackInfo.album.image[3]["#text"]+")"}}
-            />
-          </div>
-        </div>
-      )
-    }
-    else {
-      return null;
-    }
-  }
-  else {
-    return null;
-  }
-};
-
-
 class SimilarOfTrack extends React.Component {
-  addFavoriteTrack=(artist, track, image)=> {
+  addFavoriteTrack=(e, artist, track, image)=> {
+    e.stopPropagation();
+    e.preventDefault();
     this.props.userActions.addFavoriteTrack(artist, track, image);
   }
-  removeFavoriteTrack=(artist, track)=> {
+  removeFavoriteTrack=(e, artist, track)=> {
+    e.stopPropagation();
+    e.preventDefault();
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
   requestSimilarOfTrack=(values)=> {
     this.props.lastfmActions.setSimilarOfTrack(values);
     this.props.lastfmActions.requestSimilarOfTrack(values);
+  }
+  goToArtist = (e, link) => {
+    e.stopPropagation();
+    e.preventDefault();
+    history.push(link);
   }
   render() {
 
@@ -91,65 +77,46 @@ class SimilarOfTrack extends React.Component {
 
       <div className="favorite_panel__inner">
         {trackInfo?
-        <div className="header_track__container spacing_bottom__small">
-          <TrackImageDisplay
-            trackInfo={trackInfo}
-          />
-          <div className="header_track__text">
-            <div>
-              <Link
-                to={"/track/"+trackInfo.artist.name+"/"+trackInfo.name}
-                className="track_name"
-              >
-                {trackInfo.name}
-              </Link>
-            </div>
-            <div>
-              <Link
-                to={"/artist/"+trackInfo.artist.name}
-                className="track_artist"
-              >
-                {trackInfo.artist.name}
-              </Link>
+          <div className="similar_container">
+            <div className="track_image__container">
+              <div className="track_image__text">
+                <div className="track_image__text_track">
+                  {trackInfo.name}
+                </div>
+                <Link to={"/artist/"+trackInfo.artist.name}>
+                  <div className="track_image__text_artist">
+                    {trackInfo.artist.name}
+                  </div>
+                </Link>
+              </div>
             </div>
           </div>
-        </div>:null}
+          :null
+        }
 
         {currentSimilar.map((similar, key) =>
           <div key={key} className="similar_container">
-            <div className="track_image__container">
-              <Link
-                to={"/similar/"+similar.artist.name+"/"+similar.name}
-              >
-                <div
-                  className="track_image"
-                  style={{backgroundImage: "url("+similar.image[2]["#text"]+")"}}
-                />
-              </Link>
-            </div>
-            <div>
-              <Link
-                to={"/track/"+similar.artist.name+"/"+similar.name}
-                className="track_name"
-              >
-                {similar.name}
-              </Link>
-            </div>
-            <div>
-              <Link
-                to={"/artist/"+similar.artist.name}
-                className="track_artist"
-              >
-                {similar.artist.name}
-              </Link>
-            </div>
-            <UserOptionsDisplay
-              loggedIn={loggedIn}
-              addFavoriteTrack = {this.addFavoriteTrack}
-              removeFavoriteTrack={this.removeFavoriteTrack}
-              similar={similar}
-              favorites={favorites}
-            />
+            <Link to={"/similar/"+similar.artist.name+"/"+similar.name}>
+              <div className="track_image__container">
+                <img src={similar.image[2]["#text"]} className="track_image" alt="track"/>
+                <div className="track_image__overlay"/>
+                <div className="track_image__text">
+                  <div className="track_image__text_track">
+                    {similar.name}
+                  </div>
+                  <div className="track_image__text_artist" onClick={(e)=>this.goToArtist(e, "/artist/"+similar.artist.name)}>
+                    {similar.artist.name}
+                  </div>
+                  <UserOptionsDisplay
+                    loggedIn={loggedIn}
+                    addFavoriteTrack = {this.addFavoriteTrack}
+                    removeFavoriteTrack={this.removeFavoriteTrack}
+                    similar={similar}
+                    favorites={favorites}
+                  />
+                </div>
+              </div>
+            </Link>
           </div>
         )}
       </div>

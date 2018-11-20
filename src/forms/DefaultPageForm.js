@@ -1,5 +1,5 @@
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import {Field, reduxForm} from 'redux-form';
 import {Button} from 'react-bootstrap';
 
 const renderField = ({
@@ -28,7 +28,7 @@ const LoginForm = props => {
           Page Name
         </div>
         <Field
-          name="pageName"
+          name="currentPage"
           type="text"
           component={renderField}
         />

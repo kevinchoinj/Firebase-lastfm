@@ -1,5 +1,6 @@
-import fire from '../fire';
-import {history} from '../store';
+import fire from 'fire';
+import {history} from 'store';
+
 export const GET_FAVORITES_SUCCEEDED = 'GET_FAVORITES_SUCCEEDED';
 
 export function addFavoriteTrack(artist, track, image) {

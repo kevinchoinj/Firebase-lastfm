@@ -1,10 +1,10 @@
 export const TOGGLE_MENU = Symbol('TOGGLE_MENU');
 export const SET_LOADED = Symbol('SET_LOADED');
 
-export const toggleMenu = (isHidden) =>{
+export const toggleMenu = (menuDisplay) =>{
     return{
       type: TOGGLE_MENU,
-      isHidden
+      menuDisplay
     };
 }
 

@@ -5,7 +5,7 @@ import * as pagesActions from '../actions/pages';
 
 class Login extends React.Component {
   componentDidMount(){
-    this.props.pagesActions.setPageName('lastfmLogin');
+    this.props.pagesActions.setPage('lastfmLogin');
   }
   render() {
     return null;

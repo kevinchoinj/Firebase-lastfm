@@ -1,0 +1,117 @@
+.favorite_panel__inner {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, 20%);
+  grid-auto-rows: 15vw;
+  grid-auto-flow: row dense;
+}
+.similar_container {
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  grid-column-end: span 1;
+  grid-row-end: span 1;
+  width: 100%;
+}
+.track_image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  -webkit-transition: .4s ease-out;
+  -moz-transition: .4s ease-out;
+  -o-transition: .4s ease-out;
+  transition:.4s ease-out;
+  cursor: pointer;
+}
+.track_image:hover {
+  transform: scale(1.03, 1.03);
+}
+.track_image__overlay {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,.5);
+  -webkit-transition: .4s ease-out;
+  -moz-transition: .4s ease-out;
+  -o-transition: .4s ease-out;
+  transition:.4s ease-out;
+  pointer-events: none;
+}
+.track_image__container:hover .track_image__overlay {
+  background-color: rgba(0,0,0,0);
+}
+.track_image__text {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+}
+.track_image__text a {
+  text-decoration: none;
+  color: #ccc;
+}
+.track_image__text a:hover {
+  color: #fff;
+}
+.track_image__text_track {
+  font-weight: 600;
+}
+.track_image__text_artist {
+  -webkit-transition: .4s ease-out;
+  -moz-transition: .4s ease-out;
+  -o-transition: .4s ease-out;
+  transition:.4s ease-out;
+}
+.track_image__text_artist:hover {
+  color: #fff;
+}
+
+.live_indicator {
+  background-color: #cc0000;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  padding: 5px;
+  font-weight: 600;
+  font-size: 9px;
+  height: 11px;
+  margin-right: 14px;
+  margin-bottom: 14px;
+}
+.favorite_icon {
+  cursor: pointer;
+}
+
+.artist_title {
+  font-size: 36px;
+  margin: 14px 0px;
+}
+.artist_grid {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, 20%);
+  grid-auto-rows: 15vw;
+  grid-auto-flow: row dense;
+}
+
+@media screen and (max-width: 992px) {
+  .favorite_panel__inner {
+    grid-template-columns: repeat(2, 50%);
+    grid-auto-rows: 50vw;
+  }
+  .artist_grid {
+    grid-template-columns: repeat(2, 50%);
+    grid-auto-rows: 50vw;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .favorite_panel__inner {
+    grid-template-columns: repeat(1, 100%);
+    grid-auto-rows: 100vw;
+  }
+  .artist_grid {
+    grid-template-columns: repeat(1, 100%);
+    grid-auto-rows: 100vw;
+  }
+}

@@ -1,13 +1,13 @@
 import {
   GET_PAGES_SUCCEEDED,
   TOGGLE_SIMILAR_OF_TRACK,
-  SET_PAGE_NAME,
+  SET_PAGE,
 } from '../actions/pages'
 
 const DEFAULT_STATE={
   pages: null,
   similarOfTrack: false,
-  pageName: '',
+  currentPage: '',
 }
 export default(state=DEFAULT_STATE, payload)=>
 {
@@ -25,10 +25,10 @@ export default(state=DEFAULT_STATE, payload)=>
       };
     case TOGGLE_SIMILAR_OF_TRACK:
       return state = {...state, similarOfTrack: payload.displayed};
-    case  SET_PAGE_NAME:
-      return {
+    case  SET_PAGE:
+      return state = {
         ...state,
-        pageName: payload.pageName,
+        currentPage: payload.currentPage
       };
    default:
       return state;

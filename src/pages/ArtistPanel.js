@@ -1,13 +1,15 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import * as pagesActions from '../actions/pages';
-import * as lastfmActions from '../actions/lastfm';
-import {history} from '../store';
-import CloseButton from '../components/CloseButton';
+import {Link} from 'react-router-dom';
 import FontAwesome from 'react-fontawesome';
 import classNames from 'classnames';
-import {Link} from 'react-router-dom';
+import {history} from 'store';
+
+import * as pagesActions from 'actions/pages';
+import * as lastfmActions from 'actions/lastfm';
+
+import CloseButton from 'components/CloseButton';
 
 const BioDisplay = ({bio, createMarkup}) => {
   if (bio){
@@ -18,7 +20,7 @@ const BioDisplay = ({bio, createMarkup}) => {
     )
   }
   else {
-    return (<div></div>);
+    return null;
   }
 };
 
@@ -26,22 +28,14 @@ const ImageDisplay = ({images, artist}) => {
   if (images){
     return(
       <div className="track_image__container">
-        <Link
-          to={"/artist/"+artist}
-        >
-          <div
-            className="track_image"
-            style={{backgroundImage: "url("+images[3]["#text"]+")"}}
-          />
+        <Link to={"/artist/"+artist}>
+        <img src={images[3]["#text"]} className="track_image" alt="track"/>
         </Link>
       </div>
     )
   }
   else {
-    return (
-      <div>
-      </div>
-    );
+    return null;
   }
 };
 
@@ -49,28 +43,34 @@ const SimilarDisplay = ({similar}) => {
   if (similar.artist){
     return(
       <div>
-        <div className="info_container track_text">
+        <div className="info_container artist_title">
           <strong>Similar</strong>
         </div>
-        {similar.artist.map((artist, key)=>
-          <div key={key} className="similar_container">
-            <ImageDisplay
-              images={artist.image}
-              artist={artist.name}
-            />
-            <Link
-              to={"/artist/"+artist.name}
-              className="track_artist"
-            >
-              {artist.name}
-            </Link>
-          </div>
-        )}
+        <div className="artist_grid">
+          {similar.artist.map((artist, key)=>
+            <div key={key} className="similar_container">
+              <div className="track_image__container">
+                <ImageDisplay
+                  images={artist.image}
+                  artist={artist.name}
+                />
+                <div className="track_image__overlay"/>
+                <div className="track_image__text">
+                  <div className="track_image__text_artist">
+                    <Link to={"/artist/"+artist.name}>
+                      {artist.name}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
   else {
-    return (<div></div>);
+    return null;
   }
 };
 
@@ -85,7 +85,7 @@ const StatsDisplay = ({stats}) => {
     )
   }
   else {
-    return (<div></div>);
+    return null;
   }
 };
 
@@ -103,7 +103,7 @@ const TagsDisplay = ({tags}) => {
     )
   }
   else {
-    return (<div></div>);
+    return null;
   }
 };
 
@@ -176,7 +176,7 @@ class Register extends React.Component {
 
               :null}
 
-              <div className="track_text">
+              <div className="artist_title">
                 <strong>{artistInfo.name}</strong>
               </div>
             </div>

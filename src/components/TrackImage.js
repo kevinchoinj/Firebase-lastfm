@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import filled from '../media/filled.png';
-import unfilled from '../media/unfilled.png';
-import * as userActions from '../actions/users';
-import {bindActionCreators} from 'redux';
-import * as pagesActions from '../actions/pages';
-import lastfmImage from '../media/lastfm.png';
 import {Link} from 'react-router-dom';
+import {bindActionCreators} from 'redux';
+
+import * as userActions from 'actions/users';
+import * as pagesActions from 'actions/pages';
+
+import lastfmImage from 'media/lastfm.png';
+import filled from 'media/filled.png';
+import unfilled from 'media/unfilled.png';
 
 const UserOptionsDisplay = ({
   loggedIn,

@@ -1,30 +1,18 @@
 import React from "react";
-import {connect} from 'react-redux';
 
 class CloseButton extends React.Component{
   render(){
 	  return(
       <div
         onClick = {this.props.toggleAction}
-        className = 'close_container'
+        className = "close_container"
       >
-          <span
-            className = 'close_line1'
-          >
-          </span>
-          <span
-            className = 'close_line2'
-          >
-          </span>
+          <span className = "close_line1"/>
+          <span className = "close_line2"/>
 			</div>
 
 	  );
   }
 }
 
-export default connect(
-  (state, ownProps) => ({
-  }),
-  dispatch => ({
-  }),
-)(CloseButton);
+export default CloseButton;

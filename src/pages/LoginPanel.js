@@ -1,9 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import LoginForm from '../forms/LoginForm';
-import * as authActions from '../actions/authentication';
 import {bindActionCreators} from 'redux';
 import classNames from 'classnames';
+
+import * as authActions from 'actions/authentication';
+
+import LoginForm from 'forms/LoginForm';
 
 class LoginPanel extends React.Component {
   onSubmit = values => {
