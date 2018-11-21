@@ -1,6 +1,5 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Button} from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
 const renderField = ({
@@ -29,25 +28,29 @@ const LastfmUsernameForm = props => {
       <div className="form_container">
         <Field
           name="username"
-          placeholder=""
+          placeholder=''
           type="text"
           component={renderField}
         />
       <div>
-        <Button
+        <button
           type="submit"
           disabled = {submitting}
           className="form_button"
         >
           <FontAwesome name="play"/>
-        </Button>
+        </button>
       </div>
       </div>
     </form>
   );
 };
 
+
 export default reduxForm({
   form: "lastfmUsername",
   enableReinitialize: true,
 })(LastfmUsernameForm);
+
+
+

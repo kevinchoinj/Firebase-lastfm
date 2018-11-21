@@ -1,8 +1,8 @@
 import React from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import GetFavorites from './GetFavorites';
-import * as authActions from '../actions/authentication';
+import GetFavorites from 'requests/GetFavorites';
+import * as authActions from 'actions/authentication';
 
 const FavoritesDisplay = ({loggedIn}) => {
   if (loggedIn){

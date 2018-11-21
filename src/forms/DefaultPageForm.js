@@ -1,6 +1,5 @@
 import React from 'react';
 import {Field, reduxForm} from 'redux-form';
-import {Button} from 'react-bootstrap';
 
 const renderField = ({
   input,
@@ -58,12 +57,12 @@ const LoginForm = props => {
 
       {error && <strong>{error}</strong>}
       <div className="user_row">
-        <Button
+        <button
           type="submit"
           disabled = {submitting}
         >
           Create Page
-        </Button>
+        </button>
       </div>
     </form>
   );

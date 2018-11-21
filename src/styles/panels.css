@@ -45,6 +45,7 @@
   position: absolute;
   bottom: 12px;
   left: 12px;
+  font-size: 14px;
 }
 .track_image__text a {
   text-decoration: none;

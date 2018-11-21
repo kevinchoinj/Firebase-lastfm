@@ -32,6 +32,7 @@ class SimilarPanel extends React.Component {
   returnHome = () => {
     history.push("/");
   }
+
   render() {
     const {
       isActive,
@@ -61,7 +62,8 @@ class SimilarPanel extends React.Component {
         </div>
         <SimilarImage />
       </div>
-    ):null
+    ):
+    null
   }
 }
 

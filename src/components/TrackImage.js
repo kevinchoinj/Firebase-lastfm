@@ -19,12 +19,12 @@ const UserOptionsDisplay = ({
   }) => {
   if (loggedIn){
     return currentTrack ? (
-      <div>
+      <div className="current_text spacing_top__small">
         {favorites ?
         [favorites.hasOwnProperty(`${currentTrack.artist["#text"]}-${currentTrack.name}`) ?
           <div key={currentTrack.name}>
             <img
-              onClick={()=>removeFavoriteTrack(currentTrack.artist["#text"], currentTrack.name)}
+              onClick={(e)=>removeFavoriteTrack(e, currentTrack.artist["#text"], currentTrack.name)}
               src={filled}
               alt="filled"
               className="favorite_icon"
@@ -34,7 +34,7 @@ const UserOptionsDisplay = ({
           <div key={currentTrack.name}>
             <img
               src={unfilled}
-              onClick={()=>addFavoriteTrack(currentTrack.artist["#text"], currentTrack.name, currentTrack.image[3]["#text"])}
+              onClick={(e)=>addFavoriteTrack(e, currentTrack.artist["#text"], currentTrack.name, currentTrack.image[3]["#text"])}
               alt="unfilled"
               className="favorite_icon"
             />
@@ -50,10 +50,14 @@ const UserOptionsDisplay = ({
 };
 
 class TrackImage extends React.Component {
-  addFavoriteTrack=(artist, track, image)=> {
+  addFavoriteTrack=(e, artist, track, image)=> {
+    e.stopPropagation();
+    e.preventDefault();
     this.props.userActions.addFavoriteTrack(artist, track, image);
   }
-  removeFavoriteTrack=(artist, track)=> {
+  removeFavoriteTrack=(e,artist, track)=> {
+    e.stopPropagation();
+    e.preventDefault();
     this.props.userActions.removeFavoriteTrack(artist, track);
   }
   toggleSimilarOfTrack = () => {
@@ -86,29 +90,31 @@ class TrackImage extends React.Component {
           />
           }
         </Link>
-        <div>
-          <Link
-            to={"/track/"+currentTrack.artist["#text"]+"/"+currentTrack.name}
-            className="track_name"
-          >
-            {currentTrack.name}
-          </Link>
+        <div className="current_under">
+          <div className="current_text">
+            <Link
+              to={"/track/"+currentTrack.artist["#text"]+"/"+currentTrack.name}
+              className="track_name"
+            >
+              {currentTrack.name}
+            </Link>
+          </div>
+          <div className="current_text">
+            <Link
+              to={"/artist/"+currentTrack.artist["#text"]}
+              className="track_artist"
+            >
+              {currentTrack.artist["#text"]}
+            </Link>
+          </div>
+          <UserOptionsDisplay
+            currentTrack={currentTrack}
+            favorites={favorites}
+            addFavoriteTrack={this.addFavoriteTrack}
+            removeFavoriteTrack={this.removeFavoriteTrack}
+            loggedIn={loggedIn}
+          />
         </div>
-        <div>
-          <Link
-            to={"/artist/"+currentTrack.artist["#text"]}
-            className="track_artist"
-          >
-            {currentTrack.artist["#text"]}
-          </Link>
-        </div>
-        <UserOptionsDisplay
-          currentTrack={currentTrack}
-          favorites={favorites}
-          addFavoriteTrack={this.addFavoriteTrack}
-          removeFavoriteTrack={this.removeFavoriteTrack}
-          loggedIn={loggedIn}
-        />
       </div>
     )
     :null;

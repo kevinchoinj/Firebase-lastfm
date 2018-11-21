@@ -17,9 +17,13 @@ const FavoritesDisplay = ({favorites, removeFavoriteTrack, requestSimilarOfTrack
   if (favorites){
     return(
       <div className="favorite_panel__inner">
-        <div className="track_text info_container">
-          <strong>Favorites</strong>
+      <div className="similar_container">
+        <div className="track_image__container">
+          <div className="track_image__text">
+            Favorites
+          </div>
         </div>
+      </div>
         {Object.entries(favorites).map((favorite, key)=>
           <div key={key} className="similar_container">
           <Link to={"/similar/"+favorite[1].artist+"/"+favorite[1].track}>

@@ -44,6 +44,7 @@
   pointer-events: none;
   padding: 14px;
   box-sizing: border-box;
+  display: none;
 }
 .menu_panel__links--display{
   opacity: 1;
@@ -64,7 +65,11 @@
   color: #444;
   text-decoration: none;
 }
-
+@media screen and (max-width: 992px) {
+  .menu_panel__links{
+    display: block;
+  }
+}
 /*======================================
 =              MENU BUTTON             =
 ======================================*/
